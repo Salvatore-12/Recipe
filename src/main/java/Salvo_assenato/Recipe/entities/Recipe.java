@@ -5,8 +5,11 @@ import Salvo_assenato.Recipe.Enum.DishTemperature;
 import Salvo_assenato.Recipe.Enum.Season;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Recipe {
+
+    private UUID idRecipe;
     private String name;
     private String image;
     private String description;
