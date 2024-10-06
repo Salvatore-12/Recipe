@@ -1,9 +1,9 @@
 package Salvo_assenato.Recipe.Enum;
 
 public enum CookingMethod {
-    FORNO,
-    GRIGLIA,
-    BOLLITURA,
-    FRITTURA,
-    BRACE
+    OVEN,      // Forno
+    GRILL,     // Griglia
+    BOILING,   // Bollitura
+    FRYING,    // Frittura
+    CHARCOAL   // Brace
 }

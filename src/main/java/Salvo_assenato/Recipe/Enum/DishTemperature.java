@@ -1,6 +1,6 @@
 package Salvo_assenato.Recipe.Enum;
 
 public enum DishTemperature {
-    FREDDO,
-    CALDO
+    COLD, // FREDDO,
+    HOT   // CALDO
 }

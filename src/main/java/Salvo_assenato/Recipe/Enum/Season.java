@@ -1,7 +1,7 @@
 package Salvo_assenato.Recipe.Enum;
 
 public enum Season {
-    ESTIVO,
-    INVERNALE,
-    TUTTE
+    SUMMER, // ESTIVO,
+    WINTER, // INVERNO,
+    ALL     // TUTTE
 }
