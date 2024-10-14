@@ -5,5 +5,5 @@ public enum CookingMethod {
     GRILL,     // Griglia
     BOILING,   // Bollitura
     FRYING,    // Frittura
-    CHARCOAL   // Brace
+    EMBERS  // Brace
 }
