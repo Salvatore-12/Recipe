@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface RecipeDAO extends JpaRepository<Recipe, UUID> {
     @Override
     Optional<Recipe> findById(UUID id);
-    List<Recipe>findByNome(String name);
+    List<Recipe>findByName(String name);
     List<Recipe>findByCookingMethod(CookingMethod cookingMethod);
     List<Recipe>findByDishTemperature(DishTemperature dishTemperature);
     List<Recipe>findByDishCategory(DishCategory dishCategory);
