@@ -20,7 +20,10 @@ public class Recipe {
     private String description;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
-    private String steps;
+    @ElementCollection
+    @CollectionTable(name = "recipe_steps", joinColumns = @JoinColumn(name = "recipe_id"))
+    @Column(name = "step")
+    private List<String> steps;
     private int preparationTime; // tempo di preparazione
     private int cookingTime;     // tempo di cottura
     private int servings;        // porzioni
@@ -37,21 +40,30 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe{" +
+        String result = "Recipe{" +
                 "idRecipe=" + idRecipe +
                 ", name='" + name + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", description='" + description + '\'' +
                 ", ingredients=" + ingredients +
-                ", steps='" + steps + '\'' +
+                ", steps=\n";
+
+        // Aggiunta degli step con i numeri
+        for (int i = 0; i < steps.size(); i++) {
+            result += (i + 1) + ". " + steps.get(i) + "\n";
+        }
+
+        result +=
                 ", preparationTime=" + preparationTime +
-                ", cookingTime=" + cookingTime +
-                ", servings=" + servings +
-                ", cookingMethod=" + cookingMethod +
-                ", dishTemperature=" + dishTemperature +
-                ", dishCategory=" + dishCategory +
-                ", season=" + season +
-                ", difficulty=" + difficulty +
-                '}';
+                        ", cookingTime=" + cookingTime +
+                        ", servings=" + servings +
+                        ", cookingMethod=" + cookingMethod +
+                        ", dishTemperature=" + dishTemperature +
+                        ", dishCategory=" + dishCategory +
+                        ", season=" + season +
+                        ", difficulty=" + difficulty +
+                        '}';
+
+        return result;
     }
 }
