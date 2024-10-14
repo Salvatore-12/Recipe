@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 @Repository
-public interface RepiceDAO extends JpaRepository<Recipe, UUID> {
+public interface RecipeDAO extends JpaRepository<Recipe, UUID> {
     @Override
     Optional<Recipe> findById(UUID id);
     List<Recipe>findByNome(String name);
