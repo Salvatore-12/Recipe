@@ -1,6 +1,6 @@
 package Salvo_assenato.Recipe.service;
 
-import Salvo_assenato.Recipe.Enum.CookingMethod;
+import Salvo_assenato.Recipe.Enum.*;
 import Salvo_assenato.Recipe.entities.Ingredient;
 import Salvo_assenato.Recipe.entities.Recipe;
 import Salvo_assenato.Recipe.exceptions.NotFoundException;
@@ -100,24 +100,78 @@ public class RecipeService {
     }
 
     //custom recipe queries
+
+    //1)Query for the CookingMethod
     public List<Recipe>getOvenCookingMethod(){
         return recipeDAO.findByCookingMethod(CookingMethod.OVEN);
     }
-
     public List<Recipe>getGrillCookingMethod(){
         return recipeDAO.findByCookingMethod(CookingMethod.GRILL);
     }
-
     public List<Recipe>getBoilingCookingMethod(){
         return recipeDAO.findByCookingMethod(CookingMethod.BOILING);
     }
-
     public List<Recipe>getFryingCookingMethod(){
         return recipeDAO.findByCookingMethod(CookingMethod.FRYING);
     }
-    public List<Recipe>getEMBERSCookingMethod(){
+    public List<Recipe>getEmbersCookingMethod(){
         return recipeDAO.findByCookingMethod(CookingMethod.EMBERS);
     }
 
+    //2)Query for the DishTemperature
+    public List<Recipe>getColdDishTemperature(){
+        return recipeDAO.findByDishTemperature(DishTemperature.COLD);
+    }
+    public List<Recipe>getHotDishTemperature(){
+        return recipeDAO.findByDishTemperature(DishTemperature.HOT);
+    }
 
+    //2)Query for the DishCategory
+    public List<Recipe>getAppetizerDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.APPETIZER);
+    }
+    public List<Recipe>getMain_CourseDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.MAIN_COURSE);
+    }
+    public List<Recipe>getDessertDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.DESSERT);
+    }
+    public List<Recipe>getSide_DishDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.SIDE_DISH);
+    }
+    public List<Recipe>getSaladDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.SALAD);
+    }
+    public List<Recipe>getSoupDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.SOUP);
+    }
+    public List<Recipe>getSnackDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.SNACK);
+    }
+    public List<Recipe>getBeverageDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.BEVERAGE);
+    }
+
+    //3)Query for the Season Recipe
+    public List<Recipe>getSummerSeasonRecipe(){
+        return recipeDAO.findBySeason(Season.SUMMER);
+    }
+
+    public List<Recipe>getWinterSeasonRecipe(){
+        return recipeDAO.findBySeason(Season.WINTER);
+    }
+    public List<Recipe>getAllSeasonRecipe(){
+        return recipeDAO.findBySeason(Season.ALL);
+    }
+
+    //4)Query for the Difficulty Recipe
+    public List<Recipe>getEasyRecipe(){
+        return recipeDAO.findByDifficulty(Difficulty.EASY);
+    }
+    public List<Recipe>getMediumRecipe(){
+        return recipeDAO.findByDifficulty(Difficulty.MEDIUM);
+    }
+    public List<Recipe>getHardRecipe(){
+        return recipeDAO.findByDifficulty(Difficulty.HARD);
+    }
 }
