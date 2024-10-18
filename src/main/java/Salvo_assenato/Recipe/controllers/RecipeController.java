@@ -36,12 +36,11 @@ public class RecipeController {
         return recipeService.getEmbersCookingMethod();
     }
 
-    //2)//Dish recipe category
+    //2)Dish recipe category
     @RequestMapping("/DishCategory-Appetizer")
     public List<Recipe> getRecipeByDishCategoryAppetizer(){
         return recipeService.getAppetizerDishCategory();
     }
-
     @RequestMapping("/DishCategory-Main_Course")
     public List<Recipe> getRecipeByDishCategoryMain_Course(){
         return recipeService.getMain_CourseDishCategory();
@@ -69,5 +68,15 @@ public class RecipeController {
     @RequestMapping("/DishCategory-Beverage")
     public List<Recipe> getRecipeByDishCategoryBeverage(){
         return recipeService.getBeverageDishCategory();
+    }
+
+    //3)DishTemperature of recipe
+    @RequestMapping("/DishTemperature-Cold")
+    public List<Recipe> getRecipeDishTemperatureCold(){
+        return recipeService.getColdDishTemperature();
+    }
+    @RequestMapping("/DishTemperature-Hot")
+    public List<Recipe> getRecipeDishTemperatureHot(){
+        return recipeService.getHotDishTemperature();
     }
 }
