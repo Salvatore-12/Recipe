@@ -1,19 +1,82 @@
 package Salvo_assenato.Recipe.controllers;
 
+import Salvo_assenato.Recipe.Enum.*;
+import Salvo_assenato.Recipe.entities.Ingredient;
 import Salvo_assenato.Recipe.entities.Recipe;
+import Salvo_assenato.Recipe.service.CloudinaryService;
 import Salvo_assenato.Recipe.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/Recipe")
 public class RecipeController {
     @Autowired
     private RecipeService recipeService;
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
+    @PostMapping("/uploadImage")
+    public Map<String, Object> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
+        return cloudinaryService.uploadImage(file);
+    }
+    //metodo per creare una ricetta con un'immagine
+    @PostMapping("/createRecipeWithImage")
+    public Recipe createRecipeWithImage(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("ingredients") List<Ingredient> ingredients,
+            @RequestParam("steps") List<String> steps,
+            @RequestParam("preparationTime") int preparationTime,
+            @RequestParam("cookingTime") int cookingTime,
+            @RequestParam("servings") int servings,
+            @RequestParam("cookingMethod") CookingMethod cookingMethod,
+            @RequestParam("dishTemperature") DishTemperature dishTemperature,
+            @RequestParam("dishCategory") DishCategory dishCategory,
+            @RequestParam("season") Season season,
+            @RequestParam("difficulty") Difficulty difficulty
+    ) throws IOException {
+        // Caricamento immagine su Cloudinary
+        Map<String, Object> uploadResult = cloudinaryService.uploadImage(file);
+
+        // Creazione della ricetta
+        Recipe recipe = new Recipe();
+        recipe.setIdRecipe(UUID.randomUUID()); // Generazione di un UUID unico
+        recipe.setName(name);
+        recipe.setDescription(description);
+
+        // Istruzione degli ingredienti,vari stepse i vari enum
+        recipe.setIngredients(ingredients);
+        recipe.setSteps(steps);
+        recipe.setPreparationTime(preparationTime);
+        recipe.setCookingTime(cookingTime);
+        recipe.setServings(servings);
+        recipe.setCookingMethod(cookingMethod);
+        recipe.setDishTemperature(dishTemperature);
+        recipe.setDishCategory(dishCategory);
+        recipe.setSeason(season);
+        recipe.setDifficulty(difficulty);
+
+        // Salvataggio dell'URL immagine dalla risposta di Cloudinary
+        if (uploadResult != null && uploadResult.get("url") != null) {
+            recipe.setImageUrl(uploadResult.get("url").toString());
+        } else {
+            throw new RuntimeException("Errore nel caricamento dell'immagine");
+        }
+
+        // Salva la ricetta nel database
+        return recipeService.saveRecipe(recipe);
+    }
     //1)CookingMethods of recipe
     @RequestMapping("/CookingMethod-Oven")
     public List<Recipe> getRecipeByCookingMethodOven(){
