@@ -15,24 +15,59 @@ public class RecipeController {
     private RecipeService recipeService;
 
     //1)CookingMethods of recipe
-    @RequestMapping("/CookingMethod-oven")
-    public List<Recipe>getRecipeByCookingMethodOven(){
+    @RequestMapping("/CookingMethod-Oven")
+    public List<Recipe> getRecipeByCookingMethodOven(){
         return recipeService.getOvenCookingMethod();
     }
-    @RequestMapping("/CookingMethod-grill")
-    public List<Recipe>getRecipeByCookingMethodGrill(){
+    @RequestMapping("/CookingMethod-Grill")
+    public List<Recipe> getRecipeByCookingMethodGrill(){
         return recipeService.getGrillCookingMethod();
     }
-    @RequestMapping("/CookingMethod-oven")
-    public List<Recipe>getRecipeByCookingMethodBoiling(){
+    @RequestMapping("/CookingMethod-Boiling")
+    public List<Recipe> getRecipeByCookingMethodBoiling(){
         return recipeService.getBoilingCookingMethod();
     }
-    @RequestMapping("/CookingMethod-oven")
-    public List<Recipe>getRecipeByCookingMethodFrying(){
+    @RequestMapping("/CookingMethod-Frying")
+    public List<Recipe> getRecipeByCookingMethodFrying(){
         return recipeService.getFryingCookingMethod();
     }
-    @RequestMapping("/CookingMethod-oven")
-    public List<Recipe>getRecipeByCookingMethodEmbers(){
+    @RequestMapping("/CookingMethod-Embers")
+    public List<Recipe> getRecipeByCookingMethodEmbers(){
         return recipeService.getEmbersCookingMethod();
+    }
+
+    //2)//Dish recipe category
+    @RequestMapping("/DishCategory-Appetizer")
+    public List<Recipe> getRecipeByDishCategoryAppetizer(){
+        return recipeService.getAppetizerDishCategory();
+    }
+
+    @RequestMapping("/DishCategory-Main_Course")
+    public List<Recipe> getRecipeByDishCategoryMain_Course(){
+        return recipeService.getMain_CourseDishCategory();
+    }
+    @RequestMapping("/DishCategory-Dessert")
+    public List<Recipe> getRecipeByDishCategoryDessert(){
+        return recipeService.getDessertDishCategory();
+    }
+    @RequestMapping("/DishCategory-Side_Dish")
+    public List<Recipe> getRecipeByDishCategorySide_Dish(){
+        return recipeService.getSide_DishDishCategory();
+    }
+    @RequestMapping("/DishCategory-Salad")
+    public List<Recipe> getRecipeByDishCategorySalad(){
+        return recipeService.getSaladDishCategory();
+    }
+    @RequestMapping("/DishCategory-Soup")
+    public List<Recipe> getRecipeByDishCategorySoup(){
+        return recipeService.getSoupDishCategory();
+    }
+    @RequestMapping("/DishCategory-Snack")
+    public List<Recipe> getRecipeByDishCategorySnack(){
+        return recipeService.getSnackDishCategory();
+    }
+    @RequestMapping("/DishCategory-Beverage")
+    public List<Recipe> getRecipeByDishCategoryBeverage(){
+        return recipeService.getBeverageDishCategory();
     }
 }
