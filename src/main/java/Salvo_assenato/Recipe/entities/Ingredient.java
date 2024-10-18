@@ -21,6 +21,7 @@ public class Ingredient {
     private double quantity;
     private String unit;
 
+    public Ingredient() {}
     public Ingredient(String name, double quantity, String unit) {
         this.name = name;
         this.quantity = quantity;
