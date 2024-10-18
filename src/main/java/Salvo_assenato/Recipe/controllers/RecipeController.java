@@ -79,4 +79,18 @@ public class RecipeController {
     public List<Recipe> getRecipeDishTemperatureHot(){
         return recipeService.getHotDishTemperature();
     }
+
+    //4)Season of recipe
+    @RequestMapping("/Season-Summer")
+    public List<Recipe> getRecipeSeasonOfSummer(){
+        return recipeService.getSummerSeasonRecipe();
+    }
+    @RequestMapping("/Season-Winter")
+    public List<Recipe> getRecipeSeasonOfWinter(){
+        return recipeService.getWinterSeasonRecipe();
+    }
+    @RequestMapping("/Season-AllSeasons")
+    public List<Recipe> getRecipeOfAllSeason(){
+        return recipeService.getAllSeasonRecipe();
+    }
 }
