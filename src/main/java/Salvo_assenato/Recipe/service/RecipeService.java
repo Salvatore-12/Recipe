@@ -98,6 +98,9 @@ public class RecipeService {
         recipeDAO.deleteById(id);
 
     }
+    public Recipe saveRecipe(Recipe recipe) {
+        return recipeDAO.save(recipe);
+    }
 
     //custom recipe queries
 
