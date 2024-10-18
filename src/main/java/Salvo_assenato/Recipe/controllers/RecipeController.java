@@ -93,4 +93,18 @@ public class RecipeController {
     public List<Recipe> getRecipeOfAllSeason(){
         return recipeService.getAllSeasonRecipe();
     }
+
+    //4)Difficulty of recipe
+    @RequestMapping("/Difficulty-Easy")
+    public List<Recipe> getRecipeDifficultyEasy(){
+        return recipeService.getEasyRecipe();
+    }
+    @RequestMapping("/Difficulty-Medium")
+    public List<Recipe> getRecipeDifficultyMedium(){
+        return recipeService.getMediumRecipe();
+    }
+    @RequestMapping("/Difficulty-Hard")
+    public List<Recipe> getRecipeDifficultyHard(){
+        return recipeService.getHardRecipe();
+    }
 }
