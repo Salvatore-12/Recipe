@@ -3,19 +3,25 @@ package Salvo_assenato.Recipe.controllers;
 import Salvo_assenato.Recipe.Enum.*;
 import Salvo_assenato.Recipe.entities.Ingredient;
 import Salvo_assenato.Recipe.entities.Recipe;
+import Salvo_assenato.Recipe.payloads.RecipeDTO;
 import Salvo_assenato.Recipe.service.CloudinaryService;
 import Salvo_assenato.Recipe.service.RecipeService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Recipe")
@@ -25,58 +31,74 @@ public class RecipeController {
     @Autowired
     private CloudinaryService cloudinaryService;
 
-    @PostMapping("/uploadImage")
-    public Map<String, Object> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
-        return cloudinaryService.uploadImage(file);
-    }
-    //metodo per creare una ricetta con un'immagine
+
     @PostMapping("/createRecipeWithImage")
-    public Recipe createRecipeWithImage(
+    public ResponseEntity<?> createRecipeWithImage(
             @RequestParam("file") MultipartFile file,
-            @RequestParam("name") String name,
-            @RequestParam("description") String description,
-            @RequestParam("ingredients") List<Ingredient> ingredients,
-            @RequestParam("steps") List<String> steps,
-            @RequestParam("preparationTime") int preparationTime,
-            @RequestParam("cookingTime") int cookingTime,
-            @RequestParam("servings") int servings,
-            @RequestParam("cookingMethod") CookingMethod cookingMethod,
-            @RequestParam("dishTemperature") DishTemperature dishTemperature,
-            @RequestParam("dishCategory") DishCategory dishCategory,
-            @RequestParam("season") Season season,
-            @RequestParam("difficulty") Difficulty difficulty
-    ) throws IOException {
-        // Caricamento immagine su Cloudinary
-        Map<String, Object> uploadResult = cloudinaryService.uploadImage(file);
+            @RequestParam("recipe") String recipeJson) {
 
-        // Creazione della ricetta
-        Recipe recipe = new Recipe();
-        recipe.setIdRecipe(UUID.randomUUID()); // Generazione di un UUID unico
-        recipe.setName(name);
-        recipe.setDescription(description);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // Deserializzazione del JSON in un oggetto RecipeDTO
+            RecipeDTO recipeDTO = objectMapper.readValue(recipeJson, RecipeDTO.class);
 
-        // Istruzione degli ingredienti,vari stepse i vari enum
-        recipe.setIngredients(ingredients);
-        recipe.setSteps(steps);
-        recipe.setPreparationTime(preparationTime);
-        recipe.setCookingTime(cookingTime);
-        recipe.setServings(servings);
-        recipe.setCookingMethod(cookingMethod);
-        recipe.setDishTemperature(dishTemperature);
-        recipe.setDishCategory(dishCategory);
-        recipe.setSeason(season);
-        recipe.setDifficulty(difficulty);
+            // Crea un oggetto Recipe a partire dal DTO
+            Recipe recipe = new Recipe();
+            recipe.setIdRecipe(UUID.randomUUID());
+            recipe.setName(recipeDTO.name());
+            recipe.setDescription(recipeDTO.description());
 
-        // Salvataggio dell'URL immagine dalla risposta di Cloudinary
-        if (uploadResult != null && uploadResult.get("url") != null) {
-            recipe.setImageUrl(uploadResult.get("url").toString());
-        } else {
-            throw new RuntimeException("Errore nel caricamento dell'immagine");
+            // Controlla se il file è valido e caricalo su Cloudinary
+            if (file != null && !file.isEmpty()) {
+                Map<String, Object> uploadResult = cloudinaryService.uploadImage(file);
+                String imageUrl = uploadResult.get("secure_url").toString(); // Ottieni l'URL dell'immagine
+                recipe.setImageUrl(imageUrl); // Salva l'URL dell'immagine nella ricetta
+            } else {
+                recipe.setImageUrl(null); // Imposta null se non c'è immagine
+            }
+
+            // Controlla e converti gli ingredienti
+            if (recipeDTO.ingredients() != null) {
+                List<Ingredient> ingredients = recipeDTO.ingredients().stream()
+                        .map(recipeService::convertToIngredient)
+                        .collect(Collectors.toList());
+                ingredients.forEach(ingredient -> ingredient.setRecipe(recipe));
+                recipe.setIngredients(ingredients);
+            } else {
+                recipe.setIngredients(new ArrayList<>());
+            }
+
+            // Imposta i passaggi
+            recipe.setSteps(recipeDTO.steps() != null ? recipeDTO.steps() : new ArrayList<>());
+
+            // Imposta altri campi
+            recipe.setPreparationTime(recipeDTO.preparationTime());
+            recipe.setCookingTime(recipeDTO.cookingTime());
+            recipe.setServings(recipeDTO.servings());
+            recipe.setCookingMethod(recipeDTO.cookingMethod());
+            recipe.setDishTemperature(recipeDTO.dishTemperature());
+            recipe.setDishCategory(recipeDTO.dishCategory());
+            recipe.setSeason(recipeDTO.season());
+            recipe.setDifficulty(recipeDTO.difficulty());
+
+            // Salva la ricetta nel database
+            recipeService.saveRecipe(recipe);
+
+            return ResponseEntity.ok("Ricetta creata con successo");
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.badRequest().body("Errore nel parsing del JSON: " + e.getMessage());
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("Errore nel caricamento dell'immagine: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Errore nel salvataggio della ricetta: " + e.getMessage());
         }
-
-        // Salva la ricetta nel database
-        return recipeService.saveRecipe(recipe);
     }
+
+
+
+
+
+
     //1)CookingMethods of recipe
     @RequestMapping("/CookingMethod-Oven")
     public List<Recipe> getRecipeByCookingMethodOven(){
@@ -171,3 +193,4 @@ public class RecipeController {
         return recipeService.getHardRecipe();
     }
 }
+

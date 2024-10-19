@@ -23,31 +23,8 @@ public class RecipeService {
         return recipeDAO.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public RecipeDTO getRecipeById(UUID id){
-
-        Recipe recipe =findById(id);
-
-        return  new RecipeDTO(
-                recipe.getIdRecipe(),
-                recipe.getName(),
-                recipe.getImageUrl(),
-                recipe.getDescription(),
-
-                recipe.getIngredients().stream()
-                        .map(this::convertToIngredientDTO)
-                        .collect(Collectors.toList()),
-                recipe.getSteps(),
-                recipe.getPreparationTime(),
-                recipe.getCookingTime(),
-                recipe.getServings(),
-                recipe.getCookingMethod(),
-                recipe.getDishTemperature(),
-                recipe.getDishCategory(),
-                recipe.getSeason(),
-                recipe.getDifficulty()
-
-
-        );
+    public Recipe getRecipeById(UUID id) {
+        return recipeDAO.findById(id).orElse(null); // Assicurati che questo sia corretto
     }
     private IngredientDTO convertToIngredientDTO(Ingredient ingredient) {
         return new IngredientDTO(
@@ -61,31 +38,19 @@ public class RecipeService {
         return recipeDAO.findByName(name);
     }
 
-    public Recipe update(UUID id, RecipeDTO body) {
-        // Trova la ricetta esistente per l'ID fornito
-        Recipe found = this.findById(id);
 
-        // Aggiorna i campi della ricetta con i dati del RecipeDTO
-        found.setName(body.name());
-        found.setImageUrl(body.imageUrl());
-        found.setDescription(body.description());
-        found.setIngredients(body.ingredients().stream()
-                .map(this::convertToIngredient)
-                .collect(Collectors.toList()));
-        found.setSteps(body.steps());
-        found.setPreparationTime(body.preparationTime());
-        found.setCookingTime(body.cookingTime());
-        found.setServings(body.servings());
-        found.setCookingMethod(body.cookingMethod());
-        found.setDishTemperature(body.dishTemperature());
-        found.setDishCategory(body.dishCategory());
-        found.setSeason(body.season());
-        found.setDifficulty(body.difficulty());
+    public Ingredient convertToIngredient(IngredientDTO ingredientDTO) {
+        if (ingredientDTO == null) {
+            throw new IllegalArgumentException("IngredientDTO cannot be null");
+        }
 
-        return recipeDAO.save(found);
-    }
+        System.out.println("Converting IngredientDTO: " + ingredientDTO);
 
-    private Ingredient convertToIngredient(IngredientDTO ingredientDTO) {
+        // Verifica i valori di ingredientDTO
+        if (ingredientDTO.name() == null || ingredientDTO.unit() == null) {
+            throw new IllegalArgumentException("IngredientDTO fields cannot be null");
+        }
+
         return new Ingredient(
                 null,
                 ingredientDTO.name(),
@@ -93,6 +58,8 @@ public class RecipeService {
                 ingredientDTO.unit()
         );
     }
+
+
 
     public void delete(UUID id){
         recipeDAO.deleteById(id);
