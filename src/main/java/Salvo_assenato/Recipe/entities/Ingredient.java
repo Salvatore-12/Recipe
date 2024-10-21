@@ -1,8 +1,7 @@
 package Salvo_assenato.Recipe.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,16 +14,29 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Ingredient {
     @Id
-    @GeneratedValue
-    private UUID idIngredient;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idIngredient;
     private String name;
     private double quantity;
     private String unit;
-
-    public Ingredient(String name, double quantity, String unit) {
+    @ManyToOne
+    @JoinColumn(name = "recipe_id", nullable = false)
+    @JsonBackReference
+    private Recipe recipe;
+    public Ingredient( String name,double quantity, String unit) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
+    }
+
+    public Ingredient(Long idIngredient, String name, double quantity, String unit) {
+        this.idIngredient = idIngredient;
+        this.name = name;
+        this.quantity = quantity;
+        this.unit = unit;
+    }
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package Salvo_assenato.Recipe.entities;
 
 import Salvo_assenato.Recipe.Enum.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,8 @@ public class Recipe {
     private String imageUrl;
     private String description;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_id")
+    @JsonManagedReference
     private List<Ingredient> ingredients;
     @ElementCollection
     @CollectionTable(name = "recipe_steps", joinColumns = @JoinColumn(name = "recipe_id"))
