@@ -79,6 +79,20 @@ public class RecipeRunner implements CommandLineRunner {
             }
 
             pizzaMargherita.setIngredients(ingredients);
+            // Aggiungo i vari  passaggi per la preparazione
+            List<String> steps = new ArrayList<>();
+            steps.add("Preriscalda il forno a 250°C.");
+            steps.add("In una ciotola, mescola la farina con il lievito.");
+            steps.add("Aggiungi l'acqua e l'olio d'oliva e impasta fino ad ottenere un impasto liscio.");
+            steps.add("Lascia lievitare l'impasto coperto per circa 1 ora.");
+            steps.add("Stendi l'impasto su una teglia, creando un bordo.");
+            steps.add("Spalma la passata di pomodoro sulla base della pizza.");
+            steps.add("Aggiungi la mozzarella a fette e un filo d'olio d'oliva.");
+            steps.add("Inforna la pizza per circa 15 minuti o fino a doratura.");
+            steps.add("Aggiungi il basilico fresco prima di servire.");
+
+            pizzaMargherita.setSteps(steps);
+
             // Caricamento dell'immagine su Cloudinary
             File file = new File("C:\\Users\\UTENTE\\Desktop\\immagine per ricette\\Pizza_Margherita.jpg"); // Cambia con il tuo percorso
             try (FileInputStream fileInputStream = new FileInputStream(file)) {
@@ -98,80 +112,4 @@ public class RecipeRunner implements CommandLineRunner {
         }
     }
 
-    private void createCustomRecipe(Scanner scanner) {
-        try {
-            // Creazione di una nuova ricetta
-            Recipe customRecipe = new Recipe();
-            customRecipe.setIdRecipe(UUID.randomUUID()); // Imposta un nuovo ID per la ricetta
-
-            // Chiedi all'utente di inserire i dettagli della ricetta
-            System.out.print("Nome della ricetta: ");
-            customRecipe.setName(scanner.nextLine());
-
-            // Chiedi il percorso dell'immagine
-            System.out.print("Inserisci il percorso dell'immagine (o lascia vuoto per nessuna immagine): ");
-            String imagePath = scanner.nextLine();
-
-            // Se il percorso non è vuoto, carica l'immagine su Cloudinary
-            if (!imagePath.isEmpty()) {
-                File file = new File(imagePath);
-                if (file.exists() && !file.isDirectory()) { // Controlla se il file esiste
-                    try (FileInputStream fileInputStream = new FileInputStream(file)) {
-                        MultipartFile multipartFile = new MockMultipartFile("file", file.getName(), "image/jpeg", fileInputStream);
-                        Map<String, Object> uploadResult = cloudinaryService.uploadImage(multipartFile);
-                        String imageUrl = (String) uploadResult.get("url");
-                        customRecipe.setImageUrl(imageUrl); // Salva l'URL dell'immagine nella ricetta
-                    }
-                } else {
-                    System.out.println("Il file non esiste. Nessuna immagine caricata.");
-                }
-            }
-
-            // Ora chiedi la descrizione della ricetta
-            System.out.print("Descrizione della ricetta: ");
-            customRecipe.setDescription(scanner.nextLine());
-
-            System.out.print("Tempo di preparazione (in minuti): ");
-            customRecipe.setPreparationTime(scanner.nextInt());
-
-            System.out.print("Tempo di cottura (in minuti): ");
-            customRecipe.setCookingTime(scanner.nextInt());
-
-            System.out.print("Porzioni: ");
-            customRecipe.setServings(scanner.nextInt());
-            scanner.nextLine(); // Consuma il newline rimasto
-
-            // Aggiungi gli ingredienti
-            List<Ingredient> ingredients = new ArrayList<>();
-            String addMore;
-            do {
-                System.out.print("Nome dell'ingrediente: ");
-                String ingredientName = scanner.nextLine();
-
-                System.out.print("Quantità dell'ingrediente: ");
-                double ingredientQuantity = scanner.nextDouble();
-
-                System.out.print("Unità dell'ingrediente: ");
-                String ingredientUnit = scanner.next();
-                scanner.nextLine(); // Consuma il newline rimasto
-
-                // Crea un nuovo ingrediente e impostalo nella ricetta
-                Ingredient ingredient = new Ingredient(ingredientName, ingredientQuantity, ingredientUnit);
-                ingredient.setRecipe(customRecipe); // Imposta la ricetta all'ingrediente
-                ingredients.add(ingredient);
-
-                System.out.print("Vuoi aggiungere un altro ingrediente? (s/n): ");
-                addMore = scanner.nextLine();
-            } while (addMore.equalsIgnoreCase("s"));
-
-            customRecipe.setIngredients(ingredients); // Imposta gli ingredienti nella ricetta
-
-            // Salva la ricetta nel database
-            recipeService.saveRecipe(customRecipe);
-            System.out.println("Ricetta \"" + customRecipe.getName() + "\" salvata con successo!");
-
-        } catch (Exception e) {
-            System.out.println("Errore durante la creazione della ricetta: " + e.getMessage());
-        }
-    }
 }
