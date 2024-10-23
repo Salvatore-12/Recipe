@@ -3,6 +3,7 @@ package Salvo_assenato.Recipe;
 import Salvo_assenato.Recipe.Enum.*;
 import Salvo_assenato.Recipe.entities.Ingredient;
 import Salvo_assenato.Recipe.entities.Recipe;
+import Salvo_assenato.Recipe.factory.RecipeFactory;
 import Salvo_assenato.Recipe.service.CloudinaryService;
 import Salvo_assenato.Recipe.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.*;
@@ -22,94 +24,125 @@ public class RecipeRunner implements CommandLineRunner {
     private RecipeService recipeService;
     @Autowired
     private CloudinaryService cloudinaryService;
+    @Autowired
+    private RecipeFactory recipeFactory;
+
     @Override
     public void run(String... args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         boolean errors = false;
 
         do {
-            System.out.println("Vuoi Procedere Con la Creazione delle ricette? (y/n)");
+            System.out.println("Vuoi Procedere Con la Creazione della ricetta? (y/n)");
             String choice = scanner.nextLine();
             switch (choice.toLowerCase()) {
-                case "y"->{
-                    createRecipe();
+                case "y" -> {
+                    createPizzaMargherita(recipeFactory);
+                    createPastaAlPomodoro(recipeFactory);
                     errors = false;
-                    System.out.println("ricette create con successo!");
+                    System.out.println("ricetta create con successo!");
                 }
 
-                case "n"-> errors = false;
-                default ->{System.out.println("Input non valido. Riprova.");
-                    errors = true;}
+                case "n" -> errors = false;
+                default -> {
+                    System.out.println("Input non valido. Riprova.");
+                    errors = true;
+                }
 
             }
         } while (errors);
 
         scanner.close();
     }
-    public void createRecipe() {
-        try {
-            // Crea una nuova ricetta - Pizza Margherita
-            Recipe pizzaMargherita = new Recipe();
-            pizzaMargherita.setIdRecipe(UUID.randomUUID());
-            pizzaMargherita.setName("Pizza Margherita");
-            pizzaMargherita.setDescription("Classica pizza italiana con pomodoro, mozzarella e basilico fresco.");
-            pizzaMargherita.setPreparationTime(30); // Tempo di preparazione in minuti
-            pizzaMargherita.setCookingTime(15);     // Tempo di cottura in minuti
-            pizzaMargherita.setServings(4);         // Porzioni
-            pizzaMargherita.setCookingMethod(CookingMethod.OVEN);  // Metodo di cottura: Forno
-            pizzaMargherita.setDishTemperature(DishTemperature.HOT); // Temperatura del piatto: Caldo
-            pizzaMargherita.setDishCategory(DishCategory.SECOND_COURSE); // Categoria: Secondo
-            pizzaMargherita.setSeason(Season.ALL); // Stagione: Tutto l'anno
-            pizzaMargherita.setDifficulty(Difficulty.MEDIUM); // Difficoltà: Media
 
-            // Aggiungo gli ingredienti per la Pizza Margherita
-            List<Ingredient> ingredients = new ArrayList<>();
-            ingredients.add(new Ingredient("Farina", 500, "g"));           // Utilizza il costruttore senza ID
-            ingredients.add(new Ingredient("Acqua", 300, "ml"));
-            ingredients.add(new Ingredient("Lievito di birra", 15, "g"));
-            ingredients.add(new Ingredient("Sale", 10, "g"));
-            ingredients.add(new Ingredient("Olio d'oliva", 30, "ml"));
-            ingredients.add(new Ingredient("Passata di pomodoro", 200, "g"));
-            ingredients.add(new Ingredient("Mozzarella", 200, "g"));
-            ingredients.add(new Ingredient("Basilico fresco", 5, "foglie"));
-            ingredients.add(new Ingredient("Olio d'oliva", 20, "ml"));
+    //Metodo per la creazione della ricetta PizzaMargherita
+    public void createPizzaMargherita(RecipeFactory recipeFactory) {
+        // Lista degli ingredienti per la Pizza Margherita
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Farina", 500, "g"),
+                new Ingredient("Acqua", 300, "ml"),
+                new Ingredient("Lievito di birra", 15, "g"),
+                new Ingredient("Sale", 10, "g"),
+                new Ingredient("Olio d'oliva", 30, "ml"),
+                new Ingredient("Passata di pomodoro", 200, "g"),
+                new Ingredient("Mozzarella", 200, "g"),
+                new Ingredient("Basilico fresco", 5, "foglie"),
+                new Ingredient("Olio d'oliva", 20, "ml")
+        );
 
-            for (Ingredient ingredient : ingredients) {
-                ingredient.setRecipe(pizzaMargherita);
-            }
+        // Lista dei passaggi per la Pizza Margherita
+        List<String> steps = List.of(
+                "Preriscalda il forno a 250°C.",
+                "In una ciotola, mescola la farina con il lievito.",
+                "Aggiungi l'acqua e l'olio e impasta.",
+                "Lascia lievitare per circa 1 ora.",
+                "Stendi l'impasto su una teglia e aggiungi il pomodoro.",
+                "Aggiungi la mozzarella e l'olio.",
+                "Inforna per 15 minuti o fino a doratura.",
+                "Aggiungi basilico fresco prima di servire."
+        );
 
-            pizzaMargherita.setIngredients(ingredients);
-            // Aggiungo i vari  passaggi per la preparazione
-            List<String> steps = new ArrayList<>();
-            steps.add("Preriscalda il forno a 250°C.");
-            steps.add("In una ciotola, mescola la farina con il lievito.");
-            steps.add("Aggiungi l'acqua e l'olio d'oliva e impasta fino ad ottenere un impasto liscio.");
-            steps.add("Lascia lievitare l'impasto coperto per circa 1 ora.");
-            steps.add("Stendi l'impasto su una teglia, creando un bordo.");
-            steps.add("Spalma la passata di pomodoro sulla base della pizza.");
-            steps.add("Aggiungi la mozzarella a fette e un filo d'olio d'oliva.");
-            steps.add("Inforna la pizza per circa 15 minuti o fino a doratura.");
-            steps.add("Aggiungi il basilico fresco prima di servire.");
+        // Creo la ricetta utilizzando la RecipeFactory
+        Recipe pizzaMargherita = recipeFactory.createRecipe(
+                "Pizza Margherita",
+                "Classica pizza italiana con pomodoro, mozzarella e basilico fresco.",
+                30, 15, 4,
+                CookingMethod.OVEN,
+                DishCategory.SECOND_COURSE,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\immagine per ricette\\Pizza_Margherita.jpg"
+        );
 
-            pizzaMargherita.setSteps(steps);
+        // Salva la ricetta nel database
+        recipeService.saveRecipe(pizzaMargherita);
+        System.out.println("Ricetta Pizza Margherita salvata con successo!");
+    }
 
-            // Caricamento dell'immagine su Cloudinary
-            File file = new File("C:\\Users\\UTENTE\\Desktop\\immagine per ricette\\Pizza_Margherita.jpg"); // Cambia con il tuo percorso
-            try (FileInputStream fileInputStream = new FileInputStream(file)) {
-                MultipartFile multipartFile = new MockMultipartFile("file", file.getName(), "image/jpeg", fileInputStream);
-                Map<String, Object> uploadResult = cloudinaryService.uploadImage(multipartFile);
-                String imageUrl = (String) uploadResult.get("url");
-                pizzaMargherita.setImageUrl(imageUrl); // Salva l'URL come stringa
-            }
+    public void createPastaAlPomodoro(RecipeFactory recipeFactory) {
+        // Lista degli ingredienti per la Pasta al Pomodoro
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Pasta (spaghetti)", 400, "g"),
+                new Ingredient("Passata di pomodoro", 500, "g"),
+                new Ingredient("Aglio", 2, "spicchi"),
+                new Ingredient("Olio d'oliva", 50, "ml"),
+                new Ingredient("Sale", 10, "g"),
+                new Ingredient("Basilico fresco", 10, "foglie"),
+                new Ingredient("Parmigiano grattugiato", 50, "g")
+        );
 
-            // Salvo la ricetta nel database
-            recipeService.saveRecipe(pizzaMargherita);
+        // Lista dei passaggi per la Pasta al Pomodoro
+        List<String> steps = List.of(
+                "Metti a bollire l'acqua in una pentola grande e aggiungi il sale.",
+                "Quando l'acqua bolle, aggiungi la pasta e cuocila al dente.",
+                "Nel frattempo, scalda l'olio in una padella e aggiungi l'aglio tritato.",
+                "Fai rosolare l'aglio fino a doratura e poi aggiungi la passata di pomodoro.",
+                "Lascia cuocere la salsa per 10 minuti.",
+                "Scola la pasta e aggiungila alla salsa, mescolando bene.",
+                "Servi con basilico fresco e parmigiano grattugiato."
+        );
 
-            System.out.println("Ricetta Pizza Margherita salvata con successo!");
+        // Crea la ricetta utilizzando la RecipeFactory
+        Recipe pastaAlPomodoro = recipeFactory.createRecipe(
+                "Pasta al Pomodoro",
+                "Semplice e deliziosa pasta con salsa di pomodoro fresco.",
+                10, 15, 4,
+                CookingMethod.BOILING,
+                DishCategory.FIRST_COURSE,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\immagine per ricette\\pasta al pomodoro.jpg"
+        );
 
-        } catch (Exception e) {
-            System.out.println("Errore durante la creazione della ricetta: " + e.getMessage());
-        }
+        // Salva la ricetta nel database
+        recipeService.saveRecipe(pastaAlPomodoro);
+        System.out.println("Ricetta Pasta al Pomodoro salvata con successo!");
     }
 
 }
