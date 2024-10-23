@@ -126,9 +126,13 @@ public class RecipeController {
     public List<Recipe> getRecipeByDishCategoryAppetizer(){
         return recipeService.getAppetizerDishCategory();
     }
-    @RequestMapping("/DishCategory-Main_Course")
-    public List<Recipe> getRecipeByDishCategoryMain_Course(){
-        return recipeService.getMain_CourseDishCategory();
+    @RequestMapping("/DishCategory-First_Course")
+    public List<Recipe> getRecipeByDishCategoryFirstCourse(){
+        return recipeService.getFirstCourseDishCategory();
+    }
+    @RequestMapping("/DishCategory-Second_Course")
+    public List<Recipe> getRecipeByDishCategorySecondCourse(){
+        return recipeService.getSecondCourseDishCategory();
     }
     @RequestMapping("/DishCategory-Dessert")
     public List<Recipe> getRecipeByDishCategoryDessert(){

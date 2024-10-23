@@ -58,7 +58,7 @@ public class RecipeRunner implements CommandLineRunner {
             pizzaMargherita.setServings(4);         // Porzioni
             pizzaMargherita.setCookingMethod(CookingMethod.OVEN);  // Metodo di cottura: Forno
             pizzaMargherita.setDishTemperature(DishTemperature.HOT); // Temperatura del piatto: Caldo
-            pizzaMargherita.setDishCategory(DishCategory.MAIN_COURSE); // Categoria: Secondo
+            pizzaMargherita.setDishCategory(DishCategory.SECOND_COURSE); // Categoria: Secondo
             pizzaMargherita.setSeason(Season.ALL); // Stagione: Tutto l'anno
             pizzaMargherita.setDifficulty(Difficulty.MEDIUM); // Difficoltà: Media
 

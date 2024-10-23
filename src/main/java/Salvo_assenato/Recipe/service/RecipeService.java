@@ -100,8 +100,11 @@ public class RecipeService {
     public List<Recipe>getAppetizerDishCategory(){
         return recipeDAO.findByDishCategory(DishCategory.APPETIZER);
     }
-    public List<Recipe>getMain_CourseDishCategory(){
-        return recipeDAO.findByDishCategory(DishCategory.MAIN_COURSE);
+    public List<Recipe>getFirstCourseDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.FIRST_COURSE);
+    }
+    public List<Recipe>getSecondCourseDishCategory(){
+        return recipeDAO.findByDishCategory(DishCategory.SECOND_COURSE);
     }
     public List<Recipe>getDessertDishCategory(){
         return recipeDAO.findByDishCategory(DishCategory.DESSERT);
