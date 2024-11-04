@@ -19,9 +19,6 @@ public class RecipeService {
     @Autowired
     private RecipeDAO recipeDAO;
 
-    public Recipe findById(UUID id){
-        return recipeDAO.findById(id).orElseThrow(() -> new NotFoundException(id));
-    }
 
     public Recipe getRecipeById(UUID id) {
         return recipeDAO.findById(id).orElse(null); // Assicurati che questo sia corretto
