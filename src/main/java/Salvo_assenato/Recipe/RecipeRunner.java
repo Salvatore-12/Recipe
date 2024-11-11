@@ -37,8 +37,10 @@ public class RecipeRunner implements CommandLineRunner {
             String choice = scanner.nextLine();
             switch (choice.toLowerCase()) {
                 case "y" -> {
-                    createPizzaMargherita(recipeFactory);
-                    createPastaAlPomodoro(recipeFactory);
+                      //createPizzaMargherita(recipeFactory);
+                      //createPizzaQuattroFormaggi(recipeFactory);
+                      //createPastaAlPomodoro(recipeFactory);
+
                     errors = false;
                     System.out.println("ricetta create con successo!");
                 }
@@ -54,7 +56,7 @@ public class RecipeRunner implements CommandLineRunner {
 
         scanner.close();
     }
-
+ // SEZIONE CREAZIONE PIZZA
     //Metodo per la creazione della ricetta PizzaMargherita
     public void createPizzaMargherita(RecipeFactory recipeFactory) {
         // Lista degli ingredienti per la Pizza Margherita
@@ -94,7 +96,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\immagine per ricette\\Pizza_Margherita.jpg"
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Pizza_Margherita.jpg"
         );
 
         // Salva la ricetta nel database
@@ -102,6 +104,55 @@ public class RecipeRunner implements CommandLineRunner {
         System.out.println("Ricetta Pizza Margherita salvata con successo!");
     }
 
+    public void createPizzaQuattroFormaggi(RecipeFactory recipeFactory) {
+        // Lista degli ingredienti per la Pizza Quattro Formaggi
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Farina", 500, "g"),
+                new Ingredient("Acqua", 300, "ml"),
+                new Ingredient("Lievito di birra", 15, "g"),
+                new Ingredient("Sale", 10, "g"),
+                new Ingredient("Olio d'oliva", 30, "ml"),
+                new Ingredient("Mozzarella", 100, "g"),
+                new Ingredient("Gorgonzola", 50, "g"),
+                new Ingredient("Fontina", 50, "g"),
+                new Ingredient("Parmigiano Reggiano", 30, "g"),
+                new Ingredient("Olio d'oliva", 20, "ml")
+        );
+
+        // Lista dei passaggi per la Pizza Quattro Formaggi
+        List<String> steps = List.of(
+                "Preriscalda il forno a 250°C.",
+                "In una ciotola, mescola la farina con il lievito.",
+                "Aggiungi l'acqua e l'olio e impasta fino a ottenere un impasto omogeneo.",
+                "Lascia lievitare per circa 1 ora.",
+                "Stendi l'impasto su una teglia leggermente oliata.",
+                "Distribuisci i formaggi (mozzarella, gorgonzola, fontina, parmigiano) uniformemente sull'impasto.",
+                "Aggiungi un filo d'olio d'oliva sopra i formaggi.",
+                "Inforna per 15 minuti o fino a doratura.",
+                "Sforna e servi la pizza ben calda."
+        );
+
+        // Creo la ricetta utilizzando la RecipeFactory
+        Recipe pizzaQuattroFormaggi = recipeFactory.createRecipe(
+                "Pizza Quattro Formaggi",
+                "Pizza italiana con una combinazione di quattro formaggi: mozzarella, gorgonzola, fontina e parmigiano.",
+                30, 15, 4,
+                CookingMethod.OVEN,
+                DishCategory.SECOND_COURSE,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\pizza-quattro-formaggi.jpg"
+        );
+
+        // Salva la ricetta nel database
+        recipeService.saveRecipe(pizzaQuattroFormaggi);
+        System.out.println("Ricetta Pizza Quattro Formaggi salvata con successo!");
+    }
+
+// SEZIONE CREAZIONE DELLE PASTE
     public void createPastaAlPomodoro(RecipeFactory recipeFactory) {
         // Lista degli ingredienti per la Pasta al Pomodoro
         List<Ingredient> ingredients = List.of(
@@ -137,7 +188,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\immagine per ricette\\pasta al pomodoro.jpg"
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\pasta al pomodoro.jpg"
         );
 
         // Salva la ricetta nel database
