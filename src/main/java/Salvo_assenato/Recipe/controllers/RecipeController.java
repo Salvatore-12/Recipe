@@ -3,6 +3,7 @@ package Salvo_assenato.Recipe.controllers;
 import Salvo_assenato.Recipe.Enum.*;
 import Salvo_assenato.Recipe.entities.Ingredient;
 import Salvo_assenato.Recipe.entities.Recipe;
+import Salvo_assenato.Recipe.exceptions.NotFoundException;
 import Salvo_assenato.Recipe.payloads.RecipeDTO;
 import Salvo_assenato.Recipe.service.CloudinaryService;
 import Salvo_assenato.Recipe.service.RecipeService;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,15 @@ public class RecipeController {
     private RecipeService recipeService;
     @Autowired
     private CloudinaryService cloudinaryService;
-
+    @GetMapping("/{id}")
+    public ResponseEntity<Recipe> getRecipeById(@PathVariable("id") UUID id) {
+        try {
+            Recipe recipe = recipeService.getRecipeById(id);
+            return ResponseEntity.ok(recipe);
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 
     @PostMapping("/createRecipeWithImage")
     public ResponseEntity<?> createRecipeWithImage(
