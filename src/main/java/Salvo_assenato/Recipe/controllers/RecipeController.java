@@ -104,11 +104,6 @@ public class RecipeController {
         }
     }
 
-
-
-
-
-
     //1)CookingMethods of recipe
     @RequestMapping("/CookingMethod-Oven")
     public List<Recipe> getRecipeByCookingMethodOven(){
@@ -205,6 +200,23 @@ public class RecipeController {
     @RequestMapping("/Difficulty-Hard")
     public List<Recipe> getRecipeDifficultyHard(){
         return recipeService.getHardRecipe();
+    }
+
+    //5)search a recipe
+    @GetMapping("/search")
+    public ResponseEntity<List<Recipe>> searchRecipes(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) CookingMethod cookingMethod,
+            @RequestParam(required = false) DishCategory dishCategory) {
+        // Cerca le ricette in base ai parametri
+        List<Recipe> results = recipeService.searchRecipes(name, cookingMethod, dishCategory);
+
+        // Gestisci il caso in cui non ci siano risultati
+        if (results.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 204 No Content
+        }
+
+        return ResponseEntity.ok(results);
     }
 }
 
