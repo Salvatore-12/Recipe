@@ -9,10 +9,11 @@ import Salvo_assenato.Recipe.payloads.RecipeDTO;
 import Salvo_assenato.Recipe.repositories.RecipeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
 
 @Service
 public class RecipeService {
@@ -144,4 +145,31 @@ public class RecipeService {
     public List<Recipe>getHardRecipe(){
         return recipeDAO.findByDifficulty(Difficulty.HARD);
     }
+
+    //5)query for the search
+    public List<Recipe> searchRecipes(String name, CookingMethod cookingMethod, DishCategory dishCategory) {
+        if (StringUtils.hasText(name) && cookingMethod != null && dishCategory != null) {
+            return recipeDAO.findByNameContainingIgnoreCaseAndCookingMethodAndDishCategory(name, cookingMethod, dishCategory);
+        }
+        if (StringUtils.hasText(name) && cookingMethod != null) {
+            return recipeDAO.findByNameContainingIgnoreCaseAndCookingMethod(name, cookingMethod);
+        }
+        if (StringUtils.hasText(name) && dishCategory != null) {
+            return recipeDAO.findByNameContainingIgnoreCaseAndDishCategory(name, dishCategory);
+        }
+        if (cookingMethod != null && dishCategory != null) {
+            return recipeDAO.findByCookingMethodAndDishCategory(cookingMethod, dishCategory);
+        }
+        if (StringUtils.hasText(name)) {
+            return recipeDAO.findByNameContainingIgnoreCase(name); // Ricerca con nome parziale
+        }
+        if (cookingMethod != null) {
+            return recipeDAO.findByCookingMethod(cookingMethod);
+        }
+        if (dishCategory != null) {
+            return recipeDAO.findByDishCategory(dishCategory);
+        }
+        return recipeDAO.findAll();
+    }
+
 }
