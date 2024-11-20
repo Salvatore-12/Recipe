@@ -8,7 +8,8 @@ public enum CookingMethod {
     GRILL,     // Griglia
     BOILING,   // Bollitura
     FRYING,    // Frittura
-    EMBERS; // Brace
+    EMBERS, // Brace
+    NO_COOKING; // Nessuna Cottura
 
     @JsonCreator
     public static CookingMethod fromString(String key) {
