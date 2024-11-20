@@ -37,11 +37,12 @@ public class RecipeRunner implements CommandLineRunner {
             String choice = scanner.nextLine();
             switch (choice.toLowerCase()) {
                 case "y" -> {
-                      //createPizzaMargherita(recipeFactory);
-                      //createPizzaQuattroFormaggi(recipeFactory);
-                      //createPastaAlPomodoro(recipeFactory);
-                      //createParmigianaMelanzane(recipeFactory);
-                      //createLasagnaClassica(recipeFactory);
+                      createPizzaMargherita(recipeFactory);
+                      createPizzaQuattroFormaggi(recipeFactory);
+                      createPastaAlPomodoro(recipeFactory);
+                      createParmigianaMelanzane(recipeFactory);
+                      createLasagnaClassica(recipeFactory);
+                      createMojitoRecipe(recipeFactory);
 
 
                     errors = false;
@@ -286,6 +287,49 @@ public class RecipeRunner implements CommandLineRunner {
         // Salva la ricetta nel database
         recipeService.saveRecipe(pastaAlPomodoro);
         System.out.println("Ricetta Pasta al Pomodoro salvata con successo!");
+    }
+
+    // SEZIONE CREAZIONE BEVANDE
+
+    public void createMojitoRecipe(RecipeFactory recipeFactory) {
+
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Rum bianco", 50, "ml"),
+                new Ingredient("Zucchero di canna", 2, "cucchiaini"),
+                new Ingredient("Lime", 1, "unità"),
+                new Ingredient("Foglie di menta fresca", 10, "foglie"),
+                new Ingredient("Acqua frizzante", 100, "ml"),
+                new Ingredient("Ghiaccio tritato", 150, "g")
+        );
+
+        List<String> steps = List.of(
+                "Taglia il lime a spicchi e mettilo in un bicchiere.",
+                "Aggiungi lo zucchero di canna e pesta delicatamente per estrarre il succo dal lime.",
+                "Aggiungi le foglie di menta e schiaccia leggermente con il pestello.",
+                "Riempi il bicchiere con ghiaccio tritato.",
+                "Versa il rum bianco sopra il ghiaccio.",
+                "Completa con acqua frizzante e mescola delicatamente.",
+                "Guarnisci con una foglia di menta fresca e servi."
+        );
+
+        Recipe mojito = recipeFactory.createRecipe(
+                "Mojito",
+                "Cocktail rinfrescante a base di rum, lime, menta e zucchero di canna.",
+                10, // Tempo di preparazione
+                0,  // Tempo di cottura (non richiesto per i cocktail)
+                1,  // Porzioni
+                CookingMethod.NO_COOKING, // Nessuna cottura
+                DishCategory.BEVERAGE,    // Categoria: Bevanda
+                DishTemperature.COLD,     // Temperatura: Freddo
+                Season.SUMMER,            // Stagione: Estate
+                Difficulty.EASY,          // Difficoltà: Facile
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Mojito.jpg"
+        );
+
+        recipeService.saveRecipe(mojito);
+        System.out.println("Ricetta Mojito salvata con successo!");
     }
 
 }
