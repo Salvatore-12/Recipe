@@ -37,12 +37,13 @@ public class RecipeRunner implements CommandLineRunner {
             String choice = scanner.nextLine();
             switch (choice.toLowerCase()) {
                 case "y" -> {
-                      createPizzaMargherita(recipeFactory);
-                      createPizzaQuattroFormaggi(recipeFactory);
-                      createPastaAlPomodoro(recipeFactory);
-                      createParmigianaMelanzane(recipeFactory);
-                      createLasagnaClassica(recipeFactory);
-                      createMojitoRecipe(recipeFactory);
+                      //createPizzaMargherita(recipeFactory);
+                      //createPizzaQuattroFormaggi(recipeFactory);
+                      //createPastaAlPomodoro(recipeFactory);
+                      //createParmigianaMelanzane(recipeFactory);
+                      //createLasagnaClassica(recipeFactory);
+                      //createMojitoRecipe(recipeFactory);
+                      createSpritzRecipe(recipeFactory);
 
 
                     errors = false;
@@ -330,6 +331,45 @@ public class RecipeRunner implements CommandLineRunner {
 
         recipeService.saveRecipe(mojito);
         System.out.println("Ricetta Mojito salvata con successo!");
+    }
+
+    public void createSpritzRecipe(RecipeFactory recipeFactory) {
+        // Lista degli ingredienti per lo Spritz
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Prosecco", 60, "ml"),
+                new Ingredient("Aperol", 40, "ml"),
+                new Ingredient("Acqua frizzante", 20, "ml"),
+                new Ingredient("Ghiaccio", 150, "g"),
+                new Ingredient("Fetta d'arancia", 1, "unità")
+        );
+
+        // Lista dei passaggi per lo Spritz
+        List<String> steps = List.of(
+                "Riempi un bicchiere da vino con ghiaccio.",
+                "Versa il Prosecco nel bicchiere.",
+                "Aggiungi l'Aperol sopra il Prosecco.",
+                "Completa con acqua frizzante e mescola delicatamente.",
+                "Guarnisci con una fetta d'arancia e servi."
+        );
+
+        // Creo la ricetta utilizzando la RecipeFactory
+        Recipe spritz = recipeFactory.createRecipe(
+                "Spritz",
+                "Cocktail italiano leggero e frizzante, perfetto per l'aperitivo.",
+                5, 0, 1,
+                CookingMethod.NO_COOKING,
+                DishCategory.BEVERAGE,
+                DishTemperature.COLD,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Spritz.jpg"
+        );
+
+        // Salva la ricetta nel database
+        recipeService.saveRecipe(spritz);
+        System.out.println("Ricetta Spritz salvata con successo!");
     }
 
 }
