@@ -40,6 +40,9 @@ public class RecipeRunner implements CommandLineRunner {
                       //createPizzaMargherita(recipeFactory);
                       //createPizzaQuattroFormaggi(recipeFactory);
                       //createPastaAlPomodoro(recipeFactory);
+                      //createParmigianaMelanzane(recipeFactory);
+                      //createLasagnaClassica(recipeFactory);
+
 
                     errors = false;
                     System.out.println("ricetta create con successo!");
@@ -150,6 +153,95 @@ public class RecipeRunner implements CommandLineRunner {
         // Salva la ricetta nel database
         recipeService.saveRecipe(pizzaQuattroFormaggi);
         System.out.println("Ricetta Pizza Quattro Formaggi salvata con successo!");
+    }
+
+    //CREAZIONE ALTRE RICETTE AL FORNO
+    public void createParmigianaMelanzane(RecipeFactory recipeFactory) {
+        // Lista degli ingredienti per la Parmigiana di Melanzane
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Melanzane", 800, "g"),
+                new Ingredient("Passata di pomodoro", 400, "g"),
+                new Ingredient("Mozzarella", 250, "g"),
+                new Ingredient("Parmigiano Reggiano", 100, "g"),
+                new Ingredient("Farina", 50, "g"),
+                new Ingredient("Olio di semi", 200, "ml"),
+                new Ingredient("Basilico fresco", 10, "foglie"),
+                new Ingredient("Sale", 10, "g"),
+                new Ingredient("Olio d'oliva", 20, "ml")
+        );
+
+        // Lista dei passaggi per la Parmigiana di Melanzane
+        List<String> steps = List.of(
+                "Lava e taglia le melanzane a fette sottili.",
+                "Infarina le fette di melanzane e friggile in olio di semi caldo.",
+                "Preriscalda il forno a 180°C.",
+                "In una teglia, stendi uno strato di passata di pomodoro.",
+                "Adagia uno strato di melanzane fritte, aggiungi mozzarella, parmigiano e basilico.",
+                "Ripeti gli strati fino a esaurire gli ingredienti.",
+                "Termina con uno strato di pomodoro e parmigiano.",
+                "Inforna per 25-30 minuti fino a doratura.",
+                "Servi caldo o tiepido."
+        );
+
+        // Creo la ricetta utilizzando la RecipeFactory
+        Recipe parmigianaMelanzane = recipeFactory.createRecipe(
+                "Parmigiana di Melanzane",
+                "Un classico della cucina italiana con melanzane, pomodoro e formaggio.",
+                45, 30, 4,
+                CookingMethod.OVEN,
+                DishCategory.SECOND_COURSE,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Parmigiana di Melanzane.jpg"
+        );
+
+        // Salva la ricetta nel database
+        recipeService.saveRecipe(parmigianaMelanzane);
+        System.out.println("Ricetta Parmigiana di Melanzane salvata con successo!");
+    }
+
+    public void createLasagnaClassica(RecipeFactory recipeFactory) {
+
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Sfoglie di lasagna", 250, "g"),
+                new Ingredient("Ragù di carne", 500, "g"),
+                new Ingredient("Besciamella", 400, "ml"),
+                new Ingredient("Parmigiano Reggiano", 150, "g"),
+                new Ingredient("Mozzarella", 200, "g"),
+                new Ingredient("Burro", 20, "g"),
+                new Ingredient("Sale", 5, "g")
+        );
+
+        List<String> steps = List.of(
+                "Preriscalda il forno a 180°C.",
+                "Imburra una teglia da forno.",
+                "Stendi uno strato di besciamella sul fondo della teglia.",
+                "Aggiungi uno strato di sfoglie di lasagna, poi il ragù, la besciamella, la mozzarella e il parmigiano.",
+                "Ripeti gli strati fino a esaurire gli ingredienti.",
+                "Termina con uno strato di besciamella e abbondante parmigiano.",
+                "Inforna per 30-40 minuti fino a che la superficie non risulta dorata.",
+                "Lascia riposare per 10 minuti prima di servire."
+        );
+
+        Recipe lasagnaClassica = recipeFactory.createRecipe(
+                "Lasagna Classica",
+                "La tradizionale lasagna italiana con ragù, besciamella e parmigiano.",
+                60, 40, 6,
+                CookingMethod.OVEN,
+                DishCategory.FIRST_COURSE,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.HARD,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Lasagne al forno.jpg"
+        );
+
+        recipeService.saveRecipe(lasagnaClassica);
+        System.out.println("Ricetta Lasagna Classica salvata con successo!");
     }
 
 // SEZIONE CREAZIONE DELLE PASTE
