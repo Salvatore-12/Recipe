@@ -43,7 +43,9 @@ public class RecipeRunner implements CommandLineRunner {
                       //createParmigianaMelanzane(recipeFactory);
                       //createLasagnaClassica(recipeFactory);
                       //createMojitoRecipe(recipeFactory);
-                      createSpritzRecipe(recipeFactory);
+                      //createSpritzRecipe(recipeFactory);
+                        createCrostiniCaprinoFichi(recipeFactory);
+                        createMelanzaneParmigianaGrigliate(recipeFactory);
 
 
                     errors = false;
@@ -288,6 +290,84 @@ public class RecipeRunner implements CommandLineRunner {
         // Salva la ricetta nel database
         recipeService.saveRecipe(pastaAlPomodoro);
         System.out.println("Ricetta Pasta al Pomodoro salvata con successo!");
+    }
+    
+    // SEZIONE RICETTE ALLA GRIGLIA
+
+    public void createCrostiniCaprinoFichi(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Pane rustico", 8, "fette"),
+                new Ingredient("Formaggio caprino fresco", 200, "g"),
+                new Ingredient("Fichi freschi", 4, "pezzi"),
+                new Ingredient("Miele", 30, "ml"),
+                new Ingredient("Rosmarino fresco", 1, "rametto"),
+                new Ingredient("Olio d'oliva", 20, "ml")
+        );
+
+        List<String> steps = List.of(
+                "Taglia i fichi a fettine sottili.",
+                "Griglia le fette di pane su entrambi i lati fino a doratura.",
+                "Spalma il caprino fresco su ogni fetta di pane.",
+                "Aggiungi una fetta di fico su ciascun crostino.",
+                "Completa con un filo di miele e qualche ago di rosmarino.",
+                "Servi immediatamente come antipasto elegante."
+        );
+
+        Recipe crostiniCaprinoFichi = recipeFactory.createRecipe(
+                "Crostini Grigliati con Caprino e Fichi",
+                "Un antipasto raffinato con pane grigliato, caprino cremoso e fichi dolci.",
+                10, 5, 4,
+                CookingMethod.GRILL,
+                DishCategory.APPETIZER,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\crostino-con-caprinoFico.jpg"
+        );
+
+        recipeService.saveRecipe(crostiniCaprinoFichi);
+        System.out.println("Ricetta Crostini Grigliati con Caprino e Fichi salvata con successo!");
+    }
+
+    public void createMelanzaneParmigianaGrigliate(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Melanzane", 2, "pezzi"),
+                new Ingredient("Passata di pomodoro", 200, "ml"),
+                new Ingredient("Mozzarella", 150, "g"),
+                new Ingredient("Parmigiano Reggiano", 50, "g"),
+                new Ingredient("Basilico fresco", 8, "foglie"),
+                new Ingredient("Olio d'oliva", 30, "ml"),
+                new Ingredient("Sale", 5, "g"),
+                new Ingredient("Pepe", 3, "g")
+        );
+
+        List<String> steps = List.of(
+                "Taglia le melanzane a fette di circa 1 cm di spessore.",
+                "Spennella le fette di melanzana con olio e condiscile con sale e pepe.",
+                "Griglia le melanzane per 3-4 minuti per lato fino a quando sono morbide e con le righe dorate.",
+                "Disponi le melanzane grigliate in una teglia alternandole con strati di passata di pomodoro, mozzarella e Parmigiano.",
+                "Termina con uno strato di Parmigiano e cuoci sotto il grill del forno per 5 minuti, finché il formaggio è dorato.",
+                "Guarnisci con foglie di basilico fresco prima di servire."
+        );
+
+        Recipe melanzaneParmigianaGrigliate = recipeFactory.createRecipe(
+                "Melanzane alla Parmigiana Grigliate",
+                "Un antipasto leggero e saporito ispirato alla parmigiana di melanzane.",
+                15, 10, 4,
+                CookingMethod.GRILL,
+                DishCategory.APPETIZER,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Parmigiana-di-melanzane-grigliate-.jpg"
+        );
+
+        recipeService.saveRecipe(melanzaneParmigianaGrigliate);
+        System.out.println("Ricetta Melanzane alla Parmigiana Grigliate salvata con successo!");
     }
 
     // SEZIONE CREAZIONE BEVANDE
