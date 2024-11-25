@@ -39,12 +39,12 @@ public class RecipeRunner implements CommandLineRunner {
                 case "y" -> {
                       //createPizzaMargherita(recipeFactory);
                       //createPizzaQuattroFormaggi(recipeFactory);
-                        createVellutataDiZucca(recipeFactory);
+                        // createVellutataDiZucca(recipeFactory);
                       //createPastaAlPomodoro(recipeFactory);
                       //createParmigianaMelanzane(recipeFactory);
                       //createLasagnaClassica(recipeFactory);
-                      //createMojitoRecipe(recipeFactory);
-                      //createSpritzRecipe(recipeFactory);
+                      createMojitoRecipe(recipeFactory);
+                      createSpritzRecipe(recipeFactory);
                       //createCrostiniCaprinoFichi(recipeFactory);
                       //createMelanzaneParmigianaGrigliate(recipeFactory);
 
@@ -293,7 +293,7 @@ public class RecipeRunner implements CommandLineRunner {
         System.out.println("Ricetta Pasta al Pomodoro salvata con successo!");
     }
 
-    public void createVellutataDiZucca(RecipeFactory recipeFactory) {
+   public void createVellutataDiZucca(RecipeFactory recipeFactory) {
         List<Ingredient> ingredients = List.of(
                 new Ingredient("Zucca", 600, "g"),
                 new Ingredient("Cipolla", 1, "pezzo"),
@@ -441,7 +441,7 @@ public class RecipeRunner implements CommandLineRunner {
                 0,  // Tempo di cottura (non richiesto per i cocktail)
                 1,  // Porzioni
                 CookingMethod.NO_COOKING, // Nessuna cottura
-                DishCategory.BEVERAGE,    // Categoria: Bevanda
+                DishCategory.ALCOHOLIC_BEVERAGE,    // Categoria: Bevanda
                 DishTemperature.COLD,     // Temperatura: Freddo
                 Season.SUMMER,            // Stagione: Estate
                 Difficulty.EASY,          // Difficoltà: Facile
@@ -479,7 +479,7 @@ public class RecipeRunner implements CommandLineRunner {
                 "Cocktail italiano leggero e frizzante, perfetto per l'aperitivo.",
                 5, 0, 1,
                 CookingMethod.NO_COOKING,
-                DishCategory.BEVERAGE,
+                DishCategory.ALCOHOLIC_BEVERAGE,
                 DishTemperature.COLD,
                 Season.ALL,
                 Difficulty.EASY,

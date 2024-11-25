@@ -119,8 +119,12 @@ public class RecipeService {
     public List<Recipe>getSnackDishCategory(){
         return recipeDAO.findByDishCategory(DishCategory.SNACK);
     }
-    public List<Recipe>getBeverageDishCategory(){
-        return recipeDAO.findByDishCategory(DishCategory.BEVERAGE);
+    public List<Recipe>getAlcoholic_Drink(){
+        return recipeDAO.findByDishCategory(DishCategory.ALCOHOLIC_BEVERAGE);
+    }
+
+    public List<Recipe>getNon_Alcoholic_Drink(){
+        return recipeDAO.findByDishCategory(DishCategory.NON_ALCOHOLIC_BEVERAGE);
     }
 
     //3)Query for the Season Recipe

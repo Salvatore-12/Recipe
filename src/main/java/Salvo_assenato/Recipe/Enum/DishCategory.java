@@ -9,5 +9,7 @@ public enum DishCategory {
     SALAD,       // Insalata
     SOUP,        // Zuppa
     SNACK,       // Spuntino
-    BEVERAGE;    // Bevanda
+    ALCOHOLIC_BEVERAGE,  // Bevanda Alcolica
+    NON_ALCOHOLIC_BEVERAGE, // Bevanda Analcolica
+
 }

@@ -159,9 +159,13 @@ public class RecipeController {
     public List<Recipe> getRecipeByDishCategorySnack(){
         return recipeService.getSnackDishCategory();
     }
-    @RequestMapping("/DishCategory-Beverage")
-    public List<Recipe> getRecipeByDishCategoryBeverage(){
-        return recipeService.getBeverageDishCategory();
+    @RequestMapping("/DishCategory-Alcoholic_Drink")
+    public List<Recipe> getRecipeByDishCategoryAlcoholicDrink(){
+        return recipeService.getAlcoholic_Drink();
+    }
+    @RequestMapping("/DishCategory-Non_Alcoholic_Drink")
+    public List<Recipe> getRecipeByDishCategoryNon_AlcoholicDrink(){
+        return recipeService.getNon_Alcoholic_Drink();
     }
 
     //3)DishTemperature of recipe
