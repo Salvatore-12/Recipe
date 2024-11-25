@@ -39,18 +39,19 @@ public class RecipeRunner implements CommandLineRunner {
                 case "y" -> {
                       //createPizzaMargherita(recipeFactory);
                       //createPizzaQuattroFormaggi(recipeFactory);
-                        // createVellutataDiZucca(recipeFactory);
+                      //createVellutataDiZucca(recipeFactory);
                       //createPastaAlPomodoro(recipeFactory);
                       //createParmigianaMelanzane(recipeFactory);
                       //createLasagnaClassica(recipeFactory);
-                      createMojitoRecipe(recipeFactory);
-                      createSpritzRecipe(recipeFactory);
+                      //createMojitoRecipe(recipeFactory);
+                      //createSpritzRecipe(recipeFactory);
+                        createBevandaAlCocomero_Lime(recipeFactory);
                       //createCrostiniCaprinoFichi(recipeFactory);
                       //createMelanzaneParmigianaGrigliate(recipeFactory);
 
 
                     errors = false;
-                    System.out.println("ricetta create con successo!");
+                    System.out.println("ricetta creata con successo!");
                 }
 
                 case "n" -> errors = false;
@@ -411,7 +412,7 @@ public class RecipeRunner implements CommandLineRunner {
         System.out.println("Ricetta Melanzane alla Parmigiana Grigliate salvata con successo!");
     }
 
-    // SEZIONE CREAZIONE BEVANDE
+    // SEZIONE CREAZIONE BEVANDE ALCOLICHE
 
     public void createMojitoRecipe(RecipeFactory recipeFactory) {
 
@@ -491,6 +492,47 @@ public class RecipeRunner implements CommandLineRunner {
         // Salva la ricetta nel database
         recipeService.saveRecipe(spritz);
         System.out.println("Ricetta Spritz salvata con successo!");
+    }
+
+    // SEZIONE CREAZIONE BEVANDE ALCOLICHE
+
+    public void createBevandaAlCocomero_Lime(RecipeFactory recipeFactory) {
+        // Lista degli ingredienti per la Bevanda al Cocomero e Lime
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Cocomero", 200, "g"),
+                new Ingredient("Succo di lime", 20, "ml"),
+                new Ingredient("Acqua frizzante", 100, "ml"),
+                new Ingredient("Zucchero (opzionale)", 1, "cucchiaino"),
+                new Ingredient("Ghiaccio", 150, "g")
+        );
+
+        // Lista dei passaggi per la Bevanda al Cocomero e Lime
+        List<String> steps = List.of(
+                "Taglia il cocomero a pezzi e mettilo in un bicchiere.",
+                "Spremi il lime e aggiungi il succo al cocomero.",
+                "Aggiungi l'acqua frizzante e mescola delicatamente.",
+                "Se desideri, aggiungi un po' di zucchero e mescola ancora.",
+                "Riempi il bicchiere con ghiaccio e servi subito."
+        );
+
+        // Creo la ricetta utilizzando la RecipeFactory
+        Recipe watermelonLimeDrink = recipeFactory.createRecipe(
+                "Bevanda al Cocomero e Lime",
+                "Bevanda rinfrescante e dissetante con cocomero e lime, perfetta per l'estate.",
+                5, 0, 1,
+                CookingMethod.NO_COOKING,
+                DishCategory.NON_ALCOHOLIC_BEVERAGE,
+                DishTemperature.COLD,
+                Season.SUMMER,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Bevanda al Cocomero e Lime.jpg"
+        );
+
+        // Salva la ricetta nel database
+        recipeService.saveRecipe(watermelonLimeDrink);
+        System.out.println("Ricetta Bevanda al Cocomero e Lime salvata con successo!");
     }
 
 }
