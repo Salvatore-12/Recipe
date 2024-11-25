@@ -39,13 +39,14 @@ public class RecipeRunner implements CommandLineRunner {
                 case "y" -> {
                       //createPizzaMargherita(recipeFactory);
                       //createPizzaQuattroFormaggi(recipeFactory);
+                        createVellutataDiZucca(recipeFactory);
                       //createPastaAlPomodoro(recipeFactory);
                       //createParmigianaMelanzane(recipeFactory);
                       //createLasagnaClassica(recipeFactory);
                       //createMojitoRecipe(recipeFactory);
                       //createSpritzRecipe(recipeFactory);
-                        createCrostiniCaprinoFichi(recipeFactory);
-                        createMelanzaneParmigianaGrigliate(recipeFactory);
+                      //createCrostiniCaprinoFichi(recipeFactory);
+                      //createMelanzaneParmigianaGrigliate(recipeFactory);
 
 
                     errors = false;
@@ -247,8 +248,8 @@ public class RecipeRunner implements CommandLineRunner {
         recipeService.saveRecipe(lasagnaClassica);
         System.out.println("Ricetta Lasagna Classica salvata con successo!");
     }
-
-// SEZIONE CREAZIONE DELLE PASTE
+//
+// SEZIONE CREAZIONE DELLE Ricette Bollite
     public void createPastaAlPomodoro(RecipeFactory recipeFactory) {
         // Lista degli ingredienti per la Pasta al Pomodoro
         List<Ingredient> ingredients = List.of(
@@ -291,8 +292,48 @@ public class RecipeRunner implements CommandLineRunner {
         recipeService.saveRecipe(pastaAlPomodoro);
         System.out.println("Ricetta Pasta al Pomodoro salvata con successo!");
     }
-    
-    // SEZIONE RICETTE ALLA GRIGLIA
+
+    public void createVellutataDiZucca(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Zucca", 600, "g"),
+                new Ingredient("Cipolla", 1, "pezzo"),
+                new Ingredient("Aglio", 1, "spicchio"),
+                new Ingredient("Brodo vegetale", 1, "l"),
+                new Ingredient("Olio d'oliva", 30, "ml"),
+                new Ingredient("Sale", 5, "g"),
+                new Ingredient("Pepe nero", 2, "g"),
+                new Ingredient("Panna fresca", 50, "ml"),
+                new Ingredient("Parmigiano grattugiato", 20, "g")
+        );
+
+        List<String> steps = List.of(
+                "Taglia la zucca a cubetti e la cipolla a fettine sottili.",
+                "In una pentola, scalda l'olio d'oliva e fai soffriggere la cipolla e l'aglio tritato fino a renderli morbidi.",
+                "Aggiungi la zucca e cuoci per 5 minuti, mescolando frequentemente.",
+                "Aggiungi il brodo vegetale, porta a bollore, quindi abbassa il fuoco e lascia cuocere per 20-25 minuti, fino a quando la zucca non è morbida.",
+                "Usa un frullatore a immersione per frullare il tutto fino a ottenere una consistenza vellutata.",
+                "Aggiusta di sale e pepe a piacere, e aggiungi la panna fresca per rendere la vellutata più cremosa.",
+                "Servi la vellutata calda, guarnita con parmigiano grattugiato e un filo d'olio d'oliva."
+        );
+
+        Recipe vellutataDiZucca = recipeFactory.createRecipe(
+                "Vellutata di Zucca",
+                "Un antipasto caldo e cremoso, perfetto per l'autunno o l'inverno, con zucca e un tocco di panna.",
+                10, 35, 4,
+                CookingMethod.BOILING,
+                DishCategory.APPETIZER,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\VellutataDiZucca.jpg"
+        );
+
+        recipeService.saveRecipe(vellutataDiZucca);
+        System.out.println("Ricetta Vellutata di Zucca salvata con successo!");
+    }
+    //SEZIONE RICETTE ALLA GRIGLIA
 
     public void createCrostiniCaprinoFichi(RecipeFactory recipeFactory) {
         List<Ingredient> ingredients = List.of(
