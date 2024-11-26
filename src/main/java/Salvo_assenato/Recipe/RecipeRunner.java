@@ -45,9 +45,14 @@ public class RecipeRunner implements CommandLineRunner {
                       //createLasagnaClassica(recipeFactory);
                       //createMojitoRecipe(recipeFactory);
                       //createSpritzRecipe(recipeFactory);
-                        createBevandaAlCocomero_Lime(recipeFactory);
+                      //createBevandaAlCocomero_Lime(recipeFactory);
+                      //createFrullatoDiBanana_Fragola(recipeFactory);
                       //createCrostiniCaprinoFichi(recipeFactory);
                       //createMelanzaneParmigianaGrigliate(recipeFactory);
+                      //createZucchineFritte(recipeFactory);
+                      //createPolpetteFritte(recipeFactory);
+                      //createPatateAlCartoccio(recipeFactory);
+                        createPaneBruschettatoAlleBraci(recipeFactory);
 
 
                     errors = false;
@@ -412,6 +417,163 @@ public class RecipeRunner implements CommandLineRunner {
         System.out.println("Ricetta Melanzane alla Parmigiana Grigliate salvata con successo!");
     }
 
+    //SEZIONE RICETTE FRITTE
+
+    public void createZucchineFritte(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Zucchine", 3, "unità"),
+                new Ingredient("Farina", 100, "g"),
+                new Ingredient("Uova", 2, "unità"),
+                new Ingredient("Pane grattugiato", 100, "g"),
+                new Ingredient("Sale", 5, "g"),
+                new Ingredient("Pepe", 2, "g"),
+                new Ingredient("Olio di semi per frittura", 500, "ml")
+        );
+
+        List<String> steps = List.of(
+                "Lava e taglia le zucchine a rondelle sottili.",
+                "In una ciotola, sbatti le uova con sale e pepe.",
+                "In un altro piatto, metti la farina e in un terzo piatto il pane grattugiato.",
+                "Passa le rondelle di zucchina prima nella farina, poi nell'uovo e infine nel pane grattugiato.",
+                "Riscalda l'olio di semi in una padella e friggi le zucchine fino a doratura.",
+                "Scola le zucchine su carta assorbente per eliminare l'olio in eccesso.",
+                "Servi caldo, eventualmente con una spruzzata di sale."
+        );
+
+        Recipe ZucchineFritte = recipeFactory.createRecipe(
+                "Frittura di Zucchine",
+                "Zucchine fritte croccanti, perfette come antipasto o contorno.",
+                10, 10, 4,
+                CookingMethod.FRYING,  // Metodo di cottura FRYING
+                DishCategory.SIDE_DISH,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Zucchine fritte a rondelle.jpg"
+        );
+
+        recipeService.saveRecipe(ZucchineFritte);
+        System.out.println("Ricetta Frittura di Zucchine salvata con successo!");
+    }
+
+    public void createPolpetteFritte(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Carne macinata di manzo", 500, "g"),
+                new Ingredient("Pane raffermo", 100, "g"),
+                new Ingredient("Latte", 100, "ml"),
+                new Ingredient("Uovo", 1, "unità"),
+                new Ingredient("Aglio", 1, "spicchio"),
+                new Ingredient("Prezzemolo fresco", 2, "cucchiai"),
+                new Ingredient("Sale", 5, "g"),
+                new Ingredient("Pepe", 2, "g"),
+                new Ingredient("Farina", 100, "g"),
+                new Ingredient("Olio di semi per frittura", 500, "ml")
+        );
+
+        List<String> steps = List.of(
+                "Metti il pane raffermo in una ciotola e aggiungi il latte per ammorbidirlo.",
+                "In una ciotola capiente, unisci la carne macinata, l'uovo, l'aglio tritato, il prezzemolo, il pane ammollato e mescola.",
+                "Aggiungi sale e pepe a piacere.",
+                "Forma delle piccole polpette con le mani.",
+                "Passa ogni polpetta nella farina.",
+                "Scalda l'olio in una padella e friggi le polpette fino a doratura e cottura interna.",
+                "Scola le polpette su carta assorbente per eliminare l'olio in eccesso.",
+                "Servi caldo, magari accompagnato da una salsa di pomodoro o una fresca insalata."
+        );
+
+        Recipe PolpetteFritte = recipeFactory.createRecipe(
+                "Polpette Fritte",
+                "Deliziose polpette fritte croccanti all'esterno e morbide all'interno.",
+                20, 15, 4,
+                CookingMethod.FRYING,  // Metodo di cottura FRYING
+                DishCategory.SECOND_COURSE,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Polpette-fritte.jpg"
+        );
+
+        recipeService.saveRecipe(PolpetteFritte);
+        System.out.println("Ricetta Polpette Fritte salvata con successo!");
+    }
+
+    //SEZIONE RICETTE ALLA BRACE
+    public void createPatateAlCartoccio(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Patate", 4, "unità"),
+                new Ingredient("Olio d'oliva", 2, "cucchiai"),
+                new Ingredient("Rosmarino", 2, "rametti"),
+                new Ingredient("Aglio", 2, "spicchi"),
+                new Ingredient("Sale", 1, "cucchiaino"),
+                new Ingredient("Pepe nero", 1, "pizzico")
+        );
+        List<String> steps = List.of(
+                "Lava bene le patate e asciugale.",
+                "Avvolgi ogni patata in un foglio di alluminio insieme a un rametto di rosmarino e uno spicchio d'aglio.",
+                "Posiziona le patate direttamente sulle braci calde.",
+                "Cuoci per circa 30-40 minuti, girandole di tanto in tanto.",
+                "Verifica la cottura infilzando una forchetta. Se morbide, rimuovile dalle braci.",
+                "Servi le patate al cartoccio con un filo d'olio d'oliva e una spolverata di sale e pepe."
+        );
+
+        Recipe patateAlCartoccio = recipeFactory.createRecipe(
+                "Patate al Cartoccio",
+                "Un contorno rustico e saporito cotto direttamente sulle braci.",
+                10, 40, 4,
+                CookingMethod.EMBERS,
+                DishCategory.SIDE_DISH,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Patate al cartoccio.jpg"
+        );
+
+        recipeService.saveRecipe(patateAlCartoccio);
+        System.out.println("Ricetta Patate al Cartoccio salvata con successo!");
+    }
+
+    public void createPaneBruschettatoAlleBraci(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Pane casereccio", 8, "fette"),
+                new Ingredient("Olio d'oliva", 4, "cucchiai"),
+                new Ingredient("Aglio", 2, "spicchi"),
+                new Ingredient("Pomodorini", 200, "g"),
+                new Ingredient("Basilico fresco", 1, "mazzetto"),
+                new Ingredient("Sale", 1, "pizzico"),
+                new Ingredient("Pepe nero", 1, "pizzico")
+        );
+        List<String> steps = List.of(
+                "Griglia le fette di pane direttamente sulle braci calde per circa 2-3 minuti per lato, fino a quando sono dorate e leggermente croccanti.",
+                "Sfrega ogni fetta con uno spicchio d'aglio per insaporire.",
+                "Taglia i pomodorini a cubetti e condiscili con olio d'oliva, sale, pepe e foglie di basilico spezzettate.",
+                "Distribuisci i pomodorini conditi sulle fette di pane grigliato.",
+                "Servi le bruschette calde come antipasto o spuntino."
+        );
+
+        Recipe paneBruschettato = recipeFactory.createRecipe(
+                "Pane Bruschettato alle Braci",
+                "Un antipasto rustico e fragrante con il sapore autentico delle braci.",
+                10, 6, 4,
+                CookingMethod.EMBERS,
+                DishCategory.APPETIZER,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\BRUSCHETTA.jpg"
+        );
+
+        recipeService.saveRecipe(paneBruschettato);
+        System.out.println("Ricetta Pane Bruschettato alle Braci salvata con successo!");
+    }
+
     // SEZIONE CREAZIONE BEVANDE ALCOLICHE
 
     public void createMojitoRecipe(RecipeFactory recipeFactory) {
@@ -456,7 +618,6 @@ public class RecipeRunner implements CommandLineRunner {
     }
 
     public void createSpritzRecipe(RecipeFactory recipeFactory) {
-        // Lista degli ingredienti per lo Spritz
         List<Ingredient> ingredients = List.of(
                 new Ingredient("Prosecco", 60, "ml"),
                 new Ingredient("Aperol", 40, "ml"),
@@ -465,7 +626,6 @@ public class RecipeRunner implements CommandLineRunner {
                 new Ingredient("Fetta d'arancia", 1, "unità")
         );
 
-        // Lista dei passaggi per lo Spritz
         List<String> steps = List.of(
                 "Riempi un bicchiere da vino con ghiaccio.",
                 "Versa il Prosecco nel bicchiere.",
@@ -474,7 +634,6 @@ public class RecipeRunner implements CommandLineRunner {
                 "Guarnisci con una fetta d'arancia e servi."
         );
 
-        // Creo la ricetta utilizzando la RecipeFactory
         Recipe spritz = recipeFactory.createRecipe(
                 "Spritz",
                 "Cocktail italiano leggero e frizzante, perfetto per l'aperitivo.",
@@ -489,7 +648,6 @@ public class RecipeRunner implements CommandLineRunner {
                 "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Spritz.jpg"
         );
 
-        // Salva la ricetta nel database
         recipeService.saveRecipe(spritz);
         System.out.println("Ricetta Spritz salvata con successo!");
     }
@@ -497,7 +655,6 @@ public class RecipeRunner implements CommandLineRunner {
     // SEZIONE CREAZIONE BEVANDE ALCOLICHE
 
     public void createBevandaAlCocomero_Lime(RecipeFactory recipeFactory) {
-        // Lista degli ingredienti per la Bevanda al Cocomero e Lime
         List<Ingredient> ingredients = List.of(
                 new Ingredient("Cocomero", 200, "g"),
                 new Ingredient("Succo di lime", 20, "ml"),
@@ -506,7 +663,6 @@ public class RecipeRunner implements CommandLineRunner {
                 new Ingredient("Ghiaccio", 150, "g")
         );
 
-        // Lista dei passaggi per la Bevanda al Cocomero e Lime
         List<String> steps = List.of(
                 "Taglia il cocomero a pezzi e mettilo in un bicchiere.",
                 "Spremi il lime e aggiungi il succo al cocomero.",
@@ -515,7 +671,6 @@ public class RecipeRunner implements CommandLineRunner {
                 "Riempi il bicchiere con ghiaccio e servi subito."
         );
 
-        // Creo la ricetta utilizzando la RecipeFactory
         Recipe watermelonLimeDrink = recipeFactory.createRecipe(
                 "Bevanda al Cocomero e Lime",
                 "Bevanda rinfrescante e dissetante con cocomero e lime, perfetta per l'estate.",
@@ -530,9 +685,42 @@ public class RecipeRunner implements CommandLineRunner {
                 "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Bevanda al Cocomero e Lime.jpg"
         );
 
-        // Salva la ricetta nel database
         recipeService.saveRecipe(watermelonLimeDrink);
         System.out.println("Ricetta Bevanda al Cocomero e Lime salvata con successo!");
+    }
+
+    public void createFrullatoDiBanana_Fragola(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Banana", 1, "unità"),
+                new Ingredient("Fragole", 150, "g"),
+                new Ingredient("Latte di mandorla o latte normale", 200, "ml"),
+                new Ingredient("Miele", 1, "cucchiaino"),
+                new Ingredient("Ghiaccio", 100, "g")
+        );
+        List<String> steps = List.of(
+                "Sbuccia la banana e tagliala a fette.",
+                "Metti la banana, le fragole, il latte e il miele in un bicchiere alto.",
+                "Aggiungi il ghiaccio.",
+                "Mescola bene fino a ottenere una consistenza liscia.",
+                "Versa il frullato in un bicchiere e servi subito."
+        );
+
+        Recipe FrullatoDiBanane_Fragola = recipeFactory.createRecipe(
+                "Frullato alla Banana e Fragola",
+                "Frullato fresco e salutare a base di banana, fragole e latte.",
+                5, 0, 1,
+                CookingMethod.NO_COOKING,
+                DishCategory.NON_ALCOHOLIC_BEVERAGE,
+                DishTemperature.COLD,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Frullato di banane e fragola.jpg"
+        );
+
+        recipeService.saveRecipe(FrullatoDiBanane_Fragola);
+        System.out.println("Ricetta Frullato alla Banana e Fragola salvata con successo!");
     }
 
 }
