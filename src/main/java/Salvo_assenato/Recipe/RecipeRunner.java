@@ -52,7 +52,9 @@ public class RecipeRunner implements CommandLineRunner {
                       //createZucchineFritte(recipeFactory);
                       //createPolpetteFritte(recipeFactory);
                       //createPatateAlCartoccio(recipeFactory);
-                        createPaneBruschettatoAlleBraci(recipeFactory);
+                      //createPaneBruschettatoAlleBraci(recipeFactory);
+                      //createTiramisu(recipeFactory);
+                      //createLemonCheesecake(recipeFactory);
 
 
                     errors = false;
@@ -536,6 +538,85 @@ public class RecipeRunner implements CommandLineRunner {
 
         recipeService.saveRecipe(patateAlCartoccio);
         System.out.println("Ricetta Patate al Cartoccio salvata con successo!");
+    }
+
+    //Sezione RICETTE PER I DESSERT
+    public void createTiramisu(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Savoiardi", 300, "grammi"),
+                new Ingredient("Mascarpone", 500, "grammi"),
+                new Ingredient("Caffè espresso", 300, "ml"),
+                new Ingredient("Zucchero", 100, "grammi"),
+                new Ingredient("Uova", 4, "unità"),
+                new Ingredient("Cacao amaro in polvere", 2, "cucchiai")
+        );
+        List<String> steps = List.of(
+                "Prepara il caffè espresso e lascialo raffreddare.",
+                "Separa i tuorli dagli albumi. Monta i tuorli con lo zucchero fino a ottenere una crema chiara.",
+                "Incorpora il mascarpone ai tuorli montati, mescolando delicatamente.",
+                "Monta gli albumi a neve ferma e uniscili al composto di mascarpone, mescolando dal basso verso l'alto.",
+                "Immergi rapidamente i savoiardi nel caffè freddo e disponili in uno strato in una pirofila.",
+                "Stendi uno strato di crema sopra i savoiardi, quindi ripeti l'operazione creando più strati.",
+                "Spolverizza l'ultimo strato con cacao amaro.",
+                "Lascia riposare in frigorifero per almeno 4 ore prima di servire."
+        );
+
+        Recipe tiramisu = recipeFactory.createRecipe(
+                "Tiramisù",
+                "Un classico dolce italiano a base di savoiardi e mascarpone.",
+                30, 240, 8,
+                CookingMethod.NO_COOKING,
+                DishCategory.DESSERT,
+                DishTemperature.COLD,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Tiramisu.jpg"
+        );
+
+        recipeService.saveRecipe(tiramisu);
+        System.out.println("Ricetta Tiramisù salvata con successo!");
+    }
+
+    public void createLemonCheesecake(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Biscotti secchi", 200, "grammi"),
+                new Ingredient("Burro", 100, "grammi"),
+                new Ingredient("Formaggio cremoso", 500, "grammi"),
+                new Ingredient("Zucchero", 150, "grammi"),
+                new Ingredient("Panna fresca", 200, "ml"),
+                new Ingredient("Gelatina in fogli", 10, "grammi"),
+                new Ingredient("Succo di limone", 2, "unità"),
+                new Ingredient("Scorza di limone grattugiata", 1, "unità")
+        );
+        List<String> steps = List.of(
+                "Trita finemente i biscotti e mescolali con il burro fuso.",
+                "Distribuisci il composto sul fondo di una tortiera a cerniera e compatta bene. Metti in frigorifero.",
+                "Metti in ammollo i fogli di gelatina in acqua fredda.",
+                "In una ciotola, mescola il formaggio cremoso con lo zucchero e la scorza di limone.",
+                "Scalda leggermente il succo di limone, aggiungi la gelatina strizzata e mescola fino a scioglierla.",
+                "Aggiungi il succo di limone con gelatina al composto di formaggio e mescola.",
+                "Monta leggermente la panna e incorporala delicatamente al composto.",
+                "Versa il tutto sulla base di biscotti e lascia rassodare in frigorifero per almeno 6 ore."
+        );
+
+        Recipe lemonCheesecake = recipeFactory.createRecipe(
+                "Cheesecake al Limone",
+                "Un dolce fresco e cremoso con un delizioso aroma di limone.",
+                30, 360, 8,
+                CookingMethod.NO_COOKING,
+                DishCategory.DESSERT,
+                DishTemperature.COLD,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Cheesecake al Limone.jpg"
+        );
+
+        recipeService.saveRecipe(lemonCheesecake);
+        System.out.println("Ricetta Cheesecake al Limone salvata con successo!");
     }
 
     public void createPaneBruschettatoAlleBraci(RecipeFactory recipeFactory) {
