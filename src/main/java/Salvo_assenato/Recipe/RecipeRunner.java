@@ -33,7 +33,7 @@ public class RecipeRunner implements CommandLineRunner {
         boolean errors = false;
 
         do {
-            System.out.println("Vuoi Procedere Con la Creazione della ricetta? (y/n)");
+            System.out.println("Vuoi procedere con la creazione della ricetta? (y/n)");
             String choice = scanner.nextLine();
             switch (choice.toLowerCase()) {
                 case "y" -> {
