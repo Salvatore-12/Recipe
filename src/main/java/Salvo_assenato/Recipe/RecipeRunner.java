@@ -58,8 +58,8 @@ public class RecipeRunner implements CommandLineRunner {
                       //createChocolateMousse(recipeFactory);
                       //createPannaCotta(recipeFactory);
                       //createChocolateBrownies(recipeFactory);
-                     createCrostataDiLimone(recipeFactory);
-
+                      //createCrostataDiLimone(recipeFactory);
+                        createTortaDiMele(recipeFactory);
 
                     errors = false;
                     System.out.println("ricetta creata con successo!");
@@ -758,6 +758,41 @@ public class RecipeRunner implements CommandLineRunner {
 
         recipeService.saveRecipe(crostataDiLimone);
         System.out.println("Ricetta Crostata di Limone salvata con successo!");
+    }
+
+    public void createTortaDiMele(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Mele", 600, "grammi"),
+                new Ingredient("Farina", 300, "grammi"),
+                new Ingredient("Burro", 150, "grammi"),
+                new Ingredient("Zucchero", 200, "grammi"),
+                new Ingredient("Uova", 3, "unità"),
+                new Ingredient("Cannella", 1, "cucchiaino")
+        );
+        List<String> steps = List.of(
+                "Sbuccia e taglia le mele a fettine sottili.",
+                "In una ciotola, mescola farina, zucchero e cannella.",
+                "Aggiungi le uova e il burro fuso, mescolando fino a ottenere un impasto omogeneo.",
+                "Versa l'impasto in una tortiera imburrata e disponi le mele a raggiera sulla superficie.",
+                "Cuoci in forno a 180°C per circa 40 minuti."
+        );
+
+        Recipe tortaDiMele = recipeFactory.createRecipe(
+                "Torta di Mele",
+                "Un classico dolce casalingo dal gusto genuino e avvolgente.",
+                30, 240, 8,
+                CookingMethod.OVEN,
+                DishCategory.DESSERT,
+                DishTemperature.COLD,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\torta_di_mele.jpg"
+        );
+
+        recipeService.saveRecipe(tortaDiMele);
+        System.out.println("Ricetta Torta di Mele salvata con successo!");
     }
     public void createPaneBruschettatoAlleBraci(RecipeFactory recipeFactory) {
         List<Ingredient> ingredients = List.of(
