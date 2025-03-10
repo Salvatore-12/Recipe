@@ -55,8 +55,8 @@ public class RecipeRunner implements CommandLineRunner {
                       //createPaneBruschettatoAlleBraci(recipeFactory);
                       //createTiramisu(recipeFactory);
                       //createLemonCheesecake(recipeFactory);
-                        createChocolateMousse(recipeFactory);
-
+                      //createChocolateMousse(recipeFactory);
+                      createPannaCotta(recipeFactory);
 
                     errors = false;
                     System.out.println("ricetta creata con successo!");
@@ -652,6 +652,38 @@ public class RecipeRunner implements CommandLineRunner {
 
         recipeService.saveRecipe(chocolateMousse);
         System.out.println("Ricetta Mousse al Cioccolato salvata con successo!");
+    }
+
+    public void createPannaCotta(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Panna fresca", 500, "ml"),
+                new Ingredient("Zucchero", 100, "grammi"),
+                new Ingredient("Vaniglia", 1, "baccello"),
+                new Ingredient("Gelatina in fogli", 10, "grammi")
+        );
+        List<String> steps = List.of(
+                "Metti i fogli di gelatina in ammollo in acqua fredda.",
+                "Scalda la panna con lo zucchero e la vaniglia fino a sfiorare il bollore.",
+                "Strizza la gelatina e scioglila nella panna calda.",
+                "Versa il composto negli stampini e lascia raffreddare in frigorifero per almeno 4 ore."
+        );
+
+        Recipe pannaCotta = recipeFactory.createRecipe(
+                "Panna Cotta",
+                "Un dessert cremoso e delicato, perfetto con salse ai frutti di bosco.",
+                20, 240, 6,
+                CookingMethod.NO_COOKING,
+                DishCategory.DESSERT,
+                DishTemperature.COLD,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Panna_Cotta.jpg"
+        );
+
+        recipeService.saveRecipe(pannaCotta);
+        System.out.println("Ricetta Panna Cotta salvata con successo!");
     }
 
     public void createPaneBruschettatoAlleBraci(RecipeFactory recipeFactory) {
