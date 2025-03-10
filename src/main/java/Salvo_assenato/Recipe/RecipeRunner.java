@@ -55,6 +55,7 @@ public class RecipeRunner implements CommandLineRunner {
                       //createPaneBruschettatoAlleBraci(recipeFactory);
                       //createTiramisu(recipeFactory);
                       //createLemonCheesecake(recipeFactory);
+                        createChocolateMousse(recipeFactory);
 
 
                     errors = false;
@@ -617,6 +618,40 @@ public class RecipeRunner implements CommandLineRunner {
 
         recipeService.saveRecipe(lemonCheesecake);
         System.out.println("Ricetta Cheesecake al Limone salvata con successo!");
+    }
+
+    public void createChocolateMousse(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Cioccolato fondente", 200, "grammi"),
+                new Ingredient("Panna fresca", 250, "ml"),
+                new Ingredient("Zucchero a velo", 50, "grammi"),
+                new Ingredient("Uova", 3, "unità")
+        );
+        List<String> steps = List.of(
+                "Sciogli il cioccolato fondente a bagnomaria.",
+                "Monta i tuorli con lo zucchero a velo finché diventano spumosi.",
+                "Unisci il cioccolato fuso ai tuorli montati.",
+                "Monta gli albumi a neve e incorporali delicatamente al composto.",
+                "Monta la panna e aggiungila delicatamente.",
+                "Distribuisci la mousse in coppette e lascia raffreddare in frigorifero per almeno 3 ore."
+        );
+
+        Recipe chocolateMousse = recipeFactory.createRecipe(
+                "Mousse al Cioccolato",
+                "Un dessert cremoso e avvolgente a base di cioccolato fondente.",
+                20, 180, 4,
+                CookingMethod.NO_COOKING,
+                DishCategory.DESSERT,
+                DishTemperature.COLD,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Mousse al Cioccolato.jpg"
+        );
+
+        recipeService.saveRecipe(chocolateMousse);
+        System.out.println("Ricetta Mousse al Cioccolato salvata con successo!");
     }
 
     public void createPaneBruschettatoAlleBraci(RecipeFactory recipeFactory) {
