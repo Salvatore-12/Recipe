@@ -58,6 +58,9 @@ public class RecipeRunner implements CommandLineRunner {
                       //createChocolateMousse(recipeFactory);
                       //createPannaCotta(recipeFactory);
                       //createChocolateBrownies(recipeFactory);
+                     createCrostataDiLimone(recipeFactory);
+
+
                     errors = false;
                     System.out.println("ricetta creata con successo!");
                 }
