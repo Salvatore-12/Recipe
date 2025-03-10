@@ -57,7 +57,7 @@ public class RecipeRunner implements CommandLineRunner {
                       //createLemonCheesecake(recipeFactory);
                       //createChocolateMousse(recipeFactory);
                       //createPannaCotta(recipeFactory);
-                        createChocolateBrownies(recipeFactory);
+                      //createChocolateBrownies(recipeFactory);
                     errors = false;
                     System.out.println("ricetta creata con successo!");
                 }
@@ -721,7 +721,41 @@ public class RecipeRunner implements CommandLineRunner {
         System.out.println("Ricetta Brownies al Cioccolato salvata con successo!");
     }
 
+    public void createCrostataDiLimone(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Farina", 250, "grammi"),
+                new Ingredient("Burro", 125, "grammi"),
+                new Ingredient("Zucchero a velo", 80, "grammi"),
+                new Ingredient("Uova", 2, "unità"),
+                new Ingredient("Limoni", 3, "unità"),
+                new Ingredient("Zucchero", 150, "grammi"),
+                new Ingredient("Panna fresca", 200, "ml")
+        );
+        List<String> steps = List.of(
+                "Prepara la pasta frolla mescolando farina, burro e zucchero a velo. Lascia riposare per 30 minuti.",
+                "Stendi la pasta e cuoci in bianco a 180°C per 15 minuti.",
+                "Prepara la crema mescolando succo di limone, uova, zucchero e panna.",
+                "Versa la crema nella base di pasta frolla e cuoci per altri 20 minuti.",
+                "Lascia raffreddare prima di servire."
+        );
 
+        Recipe crostataDiLimone = recipeFactory.createRecipe(
+                "Crostata di Limone",
+                "Una crostata dal gusto fresco e agrumato, perfetta per ogni occasione.",
+                30, 180, 8,
+                CookingMethod.OVEN,
+                DishCategory.DESSERT,
+                DishTemperature.COLD,
+                Season.ALL,
+                Difficulty.MEDIUM,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\crostata-al-limone.jpg"
+        );
+
+        recipeService.saveRecipe(crostataDiLimone);
+        System.out.println("Ricetta Crostata di Limone salvata con successo!");
+    }
     public void createPaneBruschettatoAlleBraci(RecipeFactory recipeFactory) {
         List<Ingredient> ingredients = List.of(
                 new Ingredient("Pane casereccio", 8, "fette"),
