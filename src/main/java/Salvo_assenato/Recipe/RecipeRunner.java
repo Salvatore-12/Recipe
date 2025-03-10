@@ -56,8 +56,8 @@ public class RecipeRunner implements CommandLineRunner {
                       //createTiramisu(recipeFactory);
                       //createLemonCheesecake(recipeFactory);
                       //createChocolateMousse(recipeFactory);
-                      createPannaCotta(recipeFactory);
-
+                      //createPannaCotta(recipeFactory);
+                        createChocolateBrownies(recipeFactory);
                     errors = false;
                     System.out.println("ricetta creata con successo!");
                 }
@@ -685,6 +685,42 @@ public class RecipeRunner implements CommandLineRunner {
         recipeService.saveRecipe(pannaCotta);
         System.out.println("Ricetta Panna Cotta salvata con successo!");
     }
+
+    public void createChocolateBrownies(RecipeFactory recipeFactory) {
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Cioccolato fondente", 200, "grammi"),
+                new Ingredient("Burro", 150, "grammi"),
+                new Ingredient("Zucchero", 200, "grammi"),
+                new Ingredient("Farina", 100, "grammi"),
+                new Ingredient("Uova", 3, "unità"),
+                new Ingredient("Cacao amaro", 30, "grammi")
+        );
+        List<String> steps = List.of(
+                "Sciogli il cioccolato e il burro a bagnomaria.",
+                "Monta le uova con lo zucchero fino a ottenere un composto spumoso.",
+                "Incorpora il cioccolato fuso e setaccia la farina e il cacao.",
+                "Versa il composto in una teglia e cuoci a 180°C per 25 minuti.",
+                "Lascia raffreddare e taglia a cubetti."
+        );
+
+        Recipe chocolateBrownies = recipeFactory.createRecipe(
+                "Brownies al Cioccolato",
+                "Dolcetti al cioccolato morbidi e irresistibili.",
+                20, 180, 12,
+                CookingMethod.OVEN,
+                DishCategory.DESSERT,
+                DishTemperature.HOT,
+                Season.ALL,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\chocolateBrownies.jpg"
+        );
+
+        recipeService.saveRecipe(chocolateBrownies);
+        System.out.println("Ricetta Brownies al Cioccolato salvata con successo!");
+    }
+
 
     public void createPaneBruschettatoAlleBraci(RecipeFactory recipeFactory) {
         List<Ingredient> ingredients = List.of(
