@@ -44,6 +44,7 @@ public class RecipeRunner implements CommandLineRunner {
                       //createParmigianaMelanzane(recipeFactory);
                       //createLasagnaClassica(recipeFactory);
                       //createMojitoRecipe(recipeFactory);
+                        createPastaFreddaEstiva(recipeFactory);
                       //createSpritzRecipe(recipeFactory);
                       //createBevandaAlCocomero_Lime(recipeFactory);
                       //createFrullatoDiBanana_Fragola(recipeFactory);
@@ -59,7 +60,7 @@ public class RecipeRunner implements CommandLineRunner {
                       //createPannaCotta(recipeFactory);
                       //createChocolateBrownies(recipeFactory);
                       //createCrostataDiLimone(recipeFactory);
-                        createTortaDiMele(recipeFactory);
+                       // createTortaDiMele(recipeFactory);
 
                     errors = false;
                     System.out.println("ricetta creata con successo!");
@@ -259,6 +260,45 @@ public class RecipeRunner implements CommandLineRunner {
 
         recipeService.saveRecipe(lasagnaClassica);
         System.out.println("Ricetta Lasagna Classica salvata con successo!");
+    }
+
+    public void createPastaFreddaEstiva(RecipeFactory recipeFactory) {
+
+        List<Ingredient> ingredients = List.of(
+                new Ingredient("Pasta corta (es. fusilli o farfalle)", 400, "g"),
+                new Ingredient("Pomodorini ciliegino", 250, "g"),
+                new Ingredient("Mozzarella", 200, "g"),
+                new Ingredient("Basilico fresco", 1, "mazzetto"),
+                new Ingredient("Olio extravergine di oliva", 4, "cucchiai"),
+                new Ingredient("Sale", 5, "g"),
+                new Ingredient("Pepe nero", 1, "g")
+        );
+
+        List<String> steps = List.of(
+                "Cuoci la pasta in abbondante acqua salata secondo il tempo indicato sulla confezione.",
+                "Scola la pasta e raffreddala sotto acqua corrente. Lasciala raffreddare completamente.",
+                "Taglia i pomodorini a metà e la mozzarella a cubetti.",
+                "In una ciotola capiente unisci la pasta fredda, i pomodorini, la mozzarella e le foglie di basilico spezzettate.",
+                "Condisci con olio extravergine d’oliva, sale e pepe a piacere.",
+                "Mescola bene e lascia riposare in frigo per almeno 30 minuti prima di servire."
+        );
+
+        Recipe pastaFreddaEstiva = recipeFactory.createRecipe(
+                "Pasta Fredda Estiva",
+                "Un primo piatto leggero e rinfrescante, perfetto per le giornate estive.",
+                15, 10, 4,
+                CookingMethod.BOILING,
+                DishCategory.FIRST_COURSE,
+                DishTemperature.COLD,
+                Season.SUMMER,
+                Difficulty.EASY,
+                ingredients,
+                steps,
+                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\pasta-fredda.jpg"
+        );
+
+        recipeService.saveRecipe(pastaFreddaEstiva);
+        System.out.println("Ricetta Pasta Fredda Estiva salvata con successo!");
     }
 //
 // SEZIONE CREAZIONE DELLE Ricette Bollite
