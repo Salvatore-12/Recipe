@@ -37,30 +37,30 @@ public class RecipeRunner implements CommandLineRunner {
             String choice = scanner.nextLine();
             switch (choice.toLowerCase()) {
                 case "y" -> {
-                      //createPizzaMargherita(recipeFactory);
-                      //createPizzaQuattroFormaggi(recipeFactory);
-                      //createVellutataDiZucca(recipeFactory);
-                      //createPastaAlPomodoro(recipeFactory);
-                      //createParmigianaMelanzane(recipeFactory);
-                      //createLasagnaClassica(recipeFactory);
-                      //createMojitoRecipe(recipeFactory);
-                        createPastaFreddaEstiva(recipeFactory);
-                      //createSpritzRecipe(recipeFactory);
-                      //createBevandaAlCocomero_Lime(recipeFactory);
-                      //createFrullatoDiBanana_Fragola(recipeFactory);
-                      //createCrostiniCaprinoFichi(recipeFactory);
-                      //createMelanzaneParmigianaGrigliate(recipeFactory);
-                      //createZucchineFritte(recipeFactory);
-                      //createPolpetteFritte(recipeFactory);
-                      //createPatateAlCartoccio(recipeFactory);
-                      //createPaneBruschettatoAlleBraci(recipeFactory);
-                      //createTiramisu(recipeFactory);
-                      //createLemonCheesecake(recipeFactory);
-                      //createChocolateMousse(recipeFactory);
-                      //createPannaCotta(recipeFactory);
-                      //createChocolateBrownies(recipeFactory);
-                      //createCrostataDiLimone(recipeFactory);
-                       // createTortaDiMele(recipeFactory);
+//                      createPizzaMargherita(recipeFactory);
+//                      createPizzaQuattroFormaggi(recipeFactory);
+//                      createVellutataDiZucca(recipeFactory);
+//                      createPastaAlPomodoro(recipeFactory);
+//                      createParmigianaMelanzane(recipeFactory);
+//                      createLasagnaClassica(recipeFactory);
+//                      createMojitoRecipe(recipeFactory);
+//                      createPastaFreddaEstiva(recipeFactory);
+//                      createSpritzRecipe(recipeFactory);
+//                      createBevandaAlCocomero_Lime(recipeFactory);
+//                      createFrullatoDiBanana_Fragola(recipeFactory);
+//                      createCrostiniCaprinoFichi(recipeFactory);
+//                      createMelanzaneParmigianaGrigliate(recipeFactory);
+//                      createZucchineFritte(recipeFactory);
+//                      createPolpetteFritte(recipeFactory);
+//                      createPatateAlCartoccio(recipeFactory);
+//                      createPaneBruschettatoAlleBraci(recipeFactory);
+//                      createTiramisu(recipeFactory);
+//                      createLemonCheesecake(recipeFactory);
+//                      createChocolateMousse(recipeFactory);
+//                      createPannaCotta(recipeFactory);
+//                      createChocolateBrownies(recipeFactory);
+//                      createCrostataDiLimone(recipeFactory);
+//                      createTortaDiMele(recipeFactory);
 
                     errors = false;
                     System.out.println("ricetta creata con successo!");
@@ -117,7 +117,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Pizza_Margherita.jpg"
+                "Pizza_Margherita.jpg"
         );
 
         // Salva la ricetta nel database
@@ -165,7 +165,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\pizza-quattro-formaggi.jpg"
+                "pizza-quattro-formaggi.jpg"
         );
 
         // Salva la ricetta nel database
@@ -213,7 +213,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Parmigiana di Melanzane.jpg"
+                "Parmigiana di Melanzane.jpg"
         );
 
         // Salva la ricetta nel database
@@ -255,7 +255,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.HARD,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Lasagne al forno.jpg"
+                "Lasagne al forno.jpg"
         );
 
         recipeService.saveRecipe(lasagnaClassica);
@@ -294,14 +294,14 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\pasta-fredda.jpg"
+                "pasta-fredda.jpg"
         );
 
         recipeService.saveRecipe(pastaFreddaEstiva);
         System.out.println("Ricetta Pasta Fredda Estiva salvata con successo!");
     }
 //
-// SEZIONE CREAZIONE DELLE Ricette Bollite
+// SEZIONE CREAZIONE DELLE RICETTE BOLLITE
     public void createPastaAlPomodoro(RecipeFactory recipeFactory) {
         // Lista degli ingredienti per la Pasta al Pomodoro
         List<Ingredient> ingredients = List.of(
@@ -337,7 +337,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\pasta al pomodoro.jpg"
+                "pasta al pomodoro.jpg"
         );
 
         // Salva la ricetta nel database
@@ -379,7 +379,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\VellutataDiZucca.jpg"
+                "VellutataDiZucca.jpg"
         );
 
         recipeService.saveRecipe(vellutataDiZucca);
@@ -417,7 +417,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\crostino-con-caprinoFico.jpg"
+                "crostino-con-caprinoFico.jpg"
         );
 
         recipeService.saveRecipe(crostiniCaprinoFichi);
@@ -456,7 +456,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Parmigiana-di-melanzane-grigliate-.jpg"
+                "Parmigiana-di-melanzane-grigliate-.jpg"
         );
 
         recipeService.saveRecipe(melanzaneParmigianaGrigliate);
@@ -497,7 +497,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Zucchine fritte a rondelle.jpg"
+                "Zucchine fritte a rondelle.jpg"
         );
 
         recipeService.saveRecipe(ZucchineFritte);
@@ -540,7 +540,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Polpette-fritte.jpg"
+                "Polpette-fritte.jpg"
         );
 
         recipeService.saveRecipe(PolpetteFritte);
@@ -577,7 +577,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Patate al cartoccio.jpg"
+                "Patate al cartoccio.jpg"
         );
 
         recipeService.saveRecipe(patateAlCartoccio);
@@ -616,7 +616,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Tiramisu.jpg"
+                "Tiramisu.jpg"
         );
 
         recipeService.saveRecipe(tiramisu);
@@ -656,7 +656,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Cheesecake al Limone.jpg"
+                "Cheesecake al Limone.jpg"
         );
 
         recipeService.saveRecipe(lemonCheesecake);
@@ -690,7 +690,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Mousse al Cioccolato.jpg"
+                "Mousse al Cioccolato.jpg"
         );
 
         recipeService.saveRecipe(chocolateMousse);
@@ -722,7 +722,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Panna_Cotta.jpg"
+                "Panna_Cotta.jpg"
         );
 
         recipeService.saveRecipe(pannaCotta);
@@ -757,7 +757,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\chocolateBrownies.jpg"
+                "chocolateBrownies.jpg"
         );
 
         recipeService.saveRecipe(chocolateBrownies);
@@ -793,7 +793,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.MEDIUM,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\crostata-al-limone.jpg"
+                "crostata-al-limone.jpg"
         );
 
         recipeService.saveRecipe(crostataDiLimone);
@@ -828,7 +828,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\torta_di_mele.jpg"
+                "torta_di_mele.jpg"
         );
 
         recipeService.saveRecipe(tortaDiMele);
@@ -863,7 +863,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\BRUSCHETTA.jpg"
+                "BRUSCHETTA.jpg"
         );
 
         recipeService.saveRecipe(paneBruschettato);
@@ -906,7 +906,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,          // Difficoltà: Facile
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Mojito.jpg"
+                "Mojito.jpg"
         );
 
         recipeService.saveRecipe(mojito);
@@ -941,7 +941,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Spritz.jpg"
+                "Spritz.jpg"
         );
 
         recipeService.saveRecipe(spritz);
@@ -978,7 +978,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Bevanda al Cocomero e Lime.jpg"
+                "Bevanda al Cocomero e Lime.jpg"
         );
 
         recipeService.saveRecipe(watermelonLimeDrink);
@@ -1012,7 +1012,7 @@ public class RecipeRunner implements CommandLineRunner {
                 Difficulty.EASY,
                 ingredients,
                 steps,
-                "C:\\Users\\UTENTE\\Desktop\\vari progetti\\immagine per ricette\\Frullato di banane e fragola.jpg"
+                "Frullato di banane e fragola.jpg"
         );
 
         recipeService.saveRecipe(FrullatoDiBanane_Fragola);
